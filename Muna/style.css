@@ -1,0 +1,437 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, serif;
+    background-color: #f4f8f9;
+    color: #095f0c;
+}
+
+.start-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    min-height: 100vh;
+}
+
+.welcome-panel,
+.login-panel {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 64px;
+}
+
+.welcome-panel {
+    background-color: #e1f0e7;
+}
+
+.welcome-panel h1 {
+    margin-top: 0;
+}
+
+.welcome-panel h2,
+.login-panel h2 {
+    margin-top: 0;
+}
+
+.login-panel {
+    width: 100%;
+    max-width: 560px;
+    margin: 0 auto;
+}
+
+.login-panel label {
+    display: block;
+    margin: 16px 0 6px;
+    color: #18352b;
+}
+
+.login-panel input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #b8c9bf;
+    border-radius: 6px;
+    font: inherit;
+}
+
+.login-panel button {
+    margin-top: 24px;
+}
+
+@media (max-width: 700px) {
+    .start-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .welcome-panel,
+    .login-panel {
+        padding: 40px 24px;
+    }
+}
+
+h1 {
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+h2 {
+    font-size: 26px;
+    margin-top: 30px;
+}
+
+p {
+    line-height: 1.6;
+    color: #5d6b70;
+}
+
+.role-selection {
+    margin-top: 35px;
+}
+
+.role-selection h3 {
+    margin-bottom: 20px;
+}
+
+button {
+    display: block;
+    width: 100%;
+    padding: 14px;
+    margin: 12px 0;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #136b3d;
+    color: white;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+/* =========================
+   PATIENTLISTE
+   ========================= */
+
+.page-container {
+    width: 90%;
+    max-width: 900px;
+    margin: 40px auto;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+header h1 {
+    margin: 0;
+}
+
+.logout-button {
+    width: auto;
+    padding: 10px 20px;
+    margin: 0;
+}
+
+.patient-list {
+    display: grid;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.patient-card {
+    background-color: var(--hvid);
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+}
+
+.patient-card h3 {
+    margin-top: 0;
+    color: var(--primaer-moerk);
+}
+
+.patient-card p {
+    margin-bottom: 20px;
+}
+/* =========================
+   INDTAST DATA
+   ========================= */
+
+.form-section {
+    background-color: var(--hvid);
+    padding: 25px;
+    margin: 25px 0;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
+}
+
+.form-section h3 {
+    color: var(--primaer-moerk);
+    margin-top: 0;
+}
+
+
+/* Forklaringsboks */
+
+.info-box {
+    background-color: var(--lysegraa);
+    padding: 15px;
+    margin: 20px 0;
+    border-radius: 8px;
+}
+
+.info-box p {
+    margin-bottom: 0;
+}
+
+
+/* Smerteskala */
+
+.pain-scale {
+    display: grid;
+    grid-template-columns: repeat(11, 1fr);
+    gap: 8px;
+    margin-top: 15px;
+}
+
+.pain-scale label {
+    text-align: center;
+    padding: 10px 5px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.pain-scale label:hover {
+    background-color: var(--lysegraa);
+}
+
+.pain-scale input {
+    display: block;
+    margin: 0 auto 5px auto;
+}
+
+.pain-labels {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 8px;
+    font-size: 14px;
+    color: var(--tekst-lys);
+}
+
+
+/* Smertetyper */
+
+.checkbox-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 15px;
+}
+
+.checkbox-list label {
+    padding: 10px;
+    border-radius: 8px;
+    background-color: var(--lysegraa);
+    cursor: pointer;
+}
+
+
+/* Andet */
+
+.other-pain-box {
+    display: none;
+    margin-top: 20px;
+}
+
+.other-pain-box textarea {
+    display: block;
+    width: 100%;
+    margin-top: 10px;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-family: Arial, sans-serif;
+    resize: vertical;
+}
+
+
+/* Dato og varighed */
+
+.form-section input[type="date"],
+.form-section select {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    margin-top: 8px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: white;
+    font-size: 15px;
+}
+
+
+/* Knapper */
+
+.form-buttons {
+    display: flex;
+    gap: 15px;
+    margin: 30px 0;
+}
+
+.form-buttons button {
+    flex: 1;
+}
+
+.secondary-button {
+    background-color: var(--graa);
+}
+
+.secondary-button:hover {
+    background-color: var(--tekst);
+}
+/* =========================
+   DETALJESIDE
+   ========================= */
+
+.back-button {
+    margin-bottom: 20px;
+}
+
+.back-button button {
+    width: auto;
+    padding: 10px 18px;
+    background-color: var(--graa);
+}
+
+.patient-info {
+    background-color: var(--hvid);
+    padding: 25px;
+    margin: 25px 0;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
+}
+
+.patient-info h3 {
+    margin-top: 0;
+    color: var(--primaer-moerk);
+}
+
+
+/* Registrering */
+
+.registration-card {
+    background-color: var(--hvid);
+    padding: 30px;
+    margin: 25px 0;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+}
+
+.registration-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+}
+
+.registration-header h3 {
+    margin: 0;
+    color: var(--primaer-moerk);
+}
+
+.status {
+    background-color: #E8F5E9;
+    color: #2E7D32;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+}
+
+
+/* Registreringspunkter */
+
+.registration-item {
+    margin: 25px 0;
+}
+
+.registration-item h4 {
+    margin-bottom: 8px;
+    color: var(--tekst-lys);
+}
+
+.registration-item p {
+    margin-top: 0;
+}
+
+
+/* Smertescore */
+
+.pain-result {
+    font-size: 38px;
+    font-weight: bold;
+    color: var(--primaer);
+}
+
+.pain-result span {
+    font-size: 18px;
+    font-weight: normal;
+    color: var(--tekst-lys);
+}
+
+
+/* Smertetyper */
+
+.pain-types {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.pain-types span {
+    background-color: var(--lysegraa);
+    padding: 8px 14px;
+    border-radius: 20px;
+}
+
+
+/* Patientens beskrivelse */
+
+.description-box {
+    background-color: var(--lysegraa);
+    padding: 15px;
+    border-radius: 8px;
+}
+
+.description-box p {
+    margin: 0;
+}
+
+
+/* Ny registrering */
+
+.new-registration {
+    background-color: var(--hvid);
+    padding: 25px;
+    margin: 25px 0 40px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
+}
+
+.new-registration h3 {
+    color: var(--primaer-moerk);
+}
+
+.new-registration button {
+    max-width: 350px;
+    margin: 20px auto 0;
+}

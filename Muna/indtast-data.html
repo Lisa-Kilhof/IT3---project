@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmerteLog - Ny registrering</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="page-container">
+
+        <header>
+            <h1>SmerteLog</h1>
+
+            <button class="logout-button" onclick="goToLogin()">
+                Log ud
+            </button>
+        </header>
+
+        <main>
+
+            <h2>Ny smerteregistrering</h2>
+
+            <p>
+                Fortæl os om dine smerter i dag.
+                Oplysningerne kan hjælpe din fagperson med at følge dine symptomer.
+            </p>
+
+
+            <!-- SMERTENIVEAU -->
+
+            <section class="form-section">
+
+                <h3>Dagens smerte</h3>
+
+                <div class="info-box">
+                    <strong>Hvordan måles smerten?</strong>
+
+                    <p>
+                        Angiv hvor stærke dine smerter er lige nu.
+                        0 betyder ingen smerter, mens 10 betyder
+                        de værst tænkelige smerter.
+                    </p>
+                </div>
+
+                <label>Vælg dit smerteniveau:</label>
+
+                <div class="pain-scale">
+
+                    <label>
+                        <input type="radio" name="pain" value="0">
+                        0
+                    </label>
+
+                    <label>
+                        <input type="radio" name="pain" value="1">
+                        1
+                    </label>
+
+                    <label>
+                        <input type="radio" name="pain" value="2">
+                        2
+                    </label>
+
+                    <label>
+                        <input type="radio" name="pain" value="3">
+                        3
+                    </label>
+
+                    <label>
+                        <input type="radio" name="pain" value="4">
+                        4
+                    </label>
+
+                    <label>
+                        <input type="radio" name="pain" value="5">
+                        5
+                    </label>
+
+                    <label>
+                        <input type="radio" name="pain" value="6">
+                        6
+                    </label>
+
+                    <label>
+                        <input type="radio" name="pain" value="7">
+                        7
+                    </label>
+
+                    <label>
+                        <input type="radio" name="pain" value="8">
+                        8
+                    </label>
+
+                    <label>
+                        <input type="radio" name="pain" value="9">
+                        9
+                    </label>
+
+                    <label>
+                        <input type="radio" name="pain" value="10">
+                        10
+                    </label>
+
+                </div>
+
+                <div class="pain-labels">
+                    <span>Ingen smerte</span>
+                    <span>Værst tænkelige smerte</span>
+                </div>
+
+            </section>
+
+
+            <!-- TYPE AF SMERTE -->
+
+            <section class="form-section">
+
+                <h3>Type af smerte</h3>
+
+                <p>Hvordan føles smerten?</p>
+
+                <div class="checkbox-list">
+
+                    <label>
+                        <input type="checkbox" name="painType" value="Stikkende">
+                        Stikkende
+                    </label>
+
+                    <label>
+                        <input type="checkbox" name="painType" value="Jagende">
+                        Jagende
+                    </label>
+
+                    <label>
+                        <input type="checkbox" name="painType" value="Brændende">
+                        Brændende
+                    </label>
+
+                    <label>
+                        <input type="checkbox" name="painType" value="Trykkende">
+                        Trykkende
+                    </label>
+
+                    <label>
+                        <input type="checkbox" name="painType" value="Dunkende">
+                        Dunkende
+                    </label>
+
+                    <label>
+                        <input type="checkbox" name="painType" value="Skærende">
+                        Skærende
+                    </label>
+
+                    <label>
+                        <input type="checkbox" name="painType" value="Øm">
+                        Øm
+                    </label>
+
+                    <label>
+                        <input type="checkbox" name="painType" value="Prikkende">
+                        Prikkende
+                    </label>
+
+                    <label>
+                        <input type="checkbox"
+                               id="otherPain"
+                               name="painType"
+                               value="Andet"
+                               onchange="showOtherPain()">
+                        Andet
+                    </label>
+
+                </div>
+
+
+                <div id="otherPainBox" class="other-pain-box">
+
+                    <label for="otherPainText">
+                        Beskriv smerten med dine egne ord:
+                    </label>
+
+                    <textarea
+                        id="otherPainText"
+                        rows="4"
+                        placeholder="Skriv her...">
+                    </textarea>
+
+                </div>
+
+            </section>
+
+
+            <!-- DATO OG VARIGHED -->
+
+            <section class="form-section">
+
+                <h3>Dato og varighed</h3>
+
+                <label for="painDate">
+                    Hvornår oplevede du smerten?
+                </label>
+
+                <input
+                    type="date"
+                    id="painDate"
+                    name="painDate">
+
+
+                <label for="duration">
+                    Hvor længe har smerten varet?
+                </label>
+
+                <select id="duration" name="duration">
+
+                    <option value="">
+                        Vælg varighed
+                    </option>
+
+                    <option>
+                        Mindre end 1 time
+                    </option>
+
+                    <option>
+                        Flere timer
+                    </option>
+
+                    <option>
+                        1 dag
+                    </option>
+
+                    <option>
+                        Flere dage
+                    </option>
+
+                    <option>
+                        Flere uger
+                    </option>
+
+                </select>
+
+            </section>
+
+
+            <!-- KNAPPER -->
+
+            <div class="form-buttons">
+
+                <button
+                    class="secondary-button"
+                    onclick="goToPatientList()">
+                    Annuller
+                </button>
+
+                <button
+                    onclick="saveRegistration()">
+                    Gem registrering
+                </button>
+
+            </div>
+
+        </main>
+
+    </div>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>

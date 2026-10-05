@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmerteLog - Patientliste</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="page-container">
+
+        <header>
+            <h1>SmerteLog</h1>
+            <button class="logout-button" onclick="goToLogin()">Log ud</button>
+        </header>
+
+        <main>
+
+            <h2>Patientliste</h2>
+
+            <p>Vælg en patient for at se registreringer eller oprette en ny registrering.</p>
+
+            <div class="patient-list">
+
+                <!-- Patient 1 -->
+                <div class="patient-card">
+                    <h3>Nana Hansen</h3>
+                    <p>Patient-ID: 1001</p>
+
+                    <button onclick="goToDetails()">
+                        Se patient
+                    </button>
+                </div>
+
+                <!-- Patient 2 -->
+                <div class="patient-card">
+                    <h3>Sahra Ahmed</h3>
+                    <p>Patient-ID: 1002</p>
+
+                    <button onclick="goToDetails()">
+                        Se patient
+                    </button>
+                </div>
+
+                <!-- Patient 3 -->
+                <div class="patient-card">
+                    <h3>Jensen Knudsen</h3>
+                    <p>Patient-ID: 1003</p>
+
+                    <button onclick="goToDetails()">
+                        Se patient
+                    </button>
+                </div>
+
+            </div>
+
+        </main>
+
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>

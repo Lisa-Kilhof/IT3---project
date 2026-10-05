@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmerteLog - Patientdetaljer</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="page-container">
+        <header>
+            <h1>SmerteLog</h1>
+
+            <button class="logout-button" onclick="goToLogin()">
+                Log ud
+            </button>
+        </header>
+        <main>
+            <div class="back-button">
+                <button onclick="goToPatientList()">
+                    ← Tilbage til patientliste
+                </button>
+            </div>
+            <h2>Patientdetaljer</h2>
+            <!-- PATIENTOPLYSNINGER -->
+            <section class="patient-info">
+                <h3>Nana Hansen</h3>
+                <p>
+                    <strong>Patient-ID:</strong> 1001
+                </p>
+            </section>
+            <!-- SENESTE REGISTRERING -->
+            <section class="registration-card">
+
+                <div class="registration-header">
+
+                    <h3>Dagens smerteregistrering</h3>
+
+                    <span class="status">
+                        Registreret
+                    </span>
+
+                </div>
+                <div class="registration-item">
+                    <h4>Dato</h4>
+
+                    <p>04-10-2026</p>
+
+                </div>
+                <div class="registration-item">
+
+                    <h4>Smerteniveau</h4>
+
+                    <div class="pain-result">
+                        7 <span>/ 10</span>
+                    </div>
+
+                </div>
+                <div class="registration-item">
+
+                    <h4>Type af smerte</h4>
+
+                    <div class="pain-types">
+
+                        <span>Brændende</span>
+                        <span>Dunkende</span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="registration-item">
+
+                    <h4>Varighed</h4>
+
+                    <p>Flere dage</p>
+
+                </div>
+
+
+                <div class="registration-item">
+
+                    <h4>Patientens egen beskrivelse</h4>
+
+                    <div class="description-box">
+
+                        <p>
+                            Jeg oplever en brændende smerte i højre side,
+                            som bliver værre om aftenen.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- NY REGISTRERING -->
+
+            <section class="new-registration">
+
+                <h3>Ny smerteregistrering</h3>
+
+                <p>
+                    Patienten kan oprette en ny registrering efter behov.
+                    En tidligere registrering kan ikke ændres.
+                </p>
+
+                <button onclick="goToNewRegistration()">
+                    + Opret ny smerteregistrering
+                </button>
+
+            </section>
+
+        </main>
+
+    </div>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>

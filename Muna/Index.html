@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+   <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmerteLog - Velkommen</title>
+  <link rel="stylesheet" href="style.css"> 
+   
+</head>
+
+<body>
+
+    <main class="start-layout">
+        <section class="welcome-panel">
+            <h1>SmerteLog</h1>
+            <h2>Velkommen</h2>
+            <p>
+                Registrér og følg dine smerter sammen med din fagperson.
+            </p>
+        </section>
+
+        <section class="login-panel">
+            <h2>Log ind</h2>
+            <form onsubmit="goToPatient(); return false;">
+                <label for="username">Brugernavn</label>
+                <input id="username" name="username" type="text" autocomplete="username" required>
+
+                <label for="password">Adgangskode</label>
+                <input id="password" name="password" type="password" autocomplete="current-password" required>
+
+                <button type="submit">Log ind</button>
+            </form>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
