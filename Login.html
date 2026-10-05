@@ -3,179 +3,44 @@
 
 <head>
 
-    <!--
-    OPGAVE 2:
-    Dette er login-siden til vores kommende sundhedsapp
-    "Blodtryksdagbog".
-
-    Vi bruger en almindelig HTML-boilerplate.
-    lang="da" fortæller, at siden er på dansk.
-    charset gør, at æ, ø og å vises korrekt.
-    viewport gør siden mere egnet til forskellige skærmstørrelser.
-    -->
-
+    <!-- Grundlæggende sideindstillinger -->
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Login - Blodtryksdagbog</title>
+    <title>Login - Smertedagbog</title>
+
+    <!-- Fælles CSS -->
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- JavaScript -->
+    <script src="script.js" defer></script>
 
 </head>
 
 
 <body>
 
-    <!--
-    OPGAVEDEL 1 – HEADER
-
-    <header> bruges til den øverste del af siden.
-    Her placerer vi appens navn og en kort beskrivelse.
-    -->
-
-    <header>
-
-        <h1>Blodtryksdagbog</h1>
-
-        <p>
-            Log ind for at få adgang til din blodtryksdagbog.
-        </p>
-
-    </header>
-
-
-    <!--
-    OPGAVEDEL 2 – MAIN
-
-    <main> indeholder sidens vigtigste indhold.
-
-    Her laver vi vores login-felter og knap.
-    -->
-
+    <!-- Login -->
     <main>
 
-        <!--
-        Her laver vi et felt til brugernavn.
+        <h1>Log ind</h1>
 
-        type="text" betyder, at brugeren kan skrive almindelig tekst.
-        placeholder viser en hjælpetekst inde i feltet.
-        -->
+        <p>Log ind for at åbne din smertedagbog.</p>
 
-        <input type="text" placeholder="Brugernavn">
+        <!-- Loginformular -->
+        <form>
 
+            <label for="username">Brugernavn</label>
+            <input type="text" id="username" name="username">
 
-        <!--
-        EKSTRAOPGAVE – ADGANGSKODE
+            <label for="password">Adgangskode</label>
+            <input type="password" id="password" name="password">
 
-        Her laver vi et ekstra felt til adgangskoden.
+            <button type="button" onclick="logInd()">Log ind</button>
 
-        type="password" gør, at teksten bliver skjult,
-        når brugeren skriver sin adgangskode.
-        -->
-
-        <input type="password" placeholder="Adgangskode">
-
-
-        <!--
-        Her laver vi login-knappen.
-
-        <button> bruges til knapper på en hjemmeside.
-        -->
-
-        <a href="velkommen.html">
-        <button>Log ind</button>
-        </a>
-
-        <!--
-        OPGAVEDEL 3 – LINK TILBAGE TIL FORSIDEN
-
-        <a> bruges til links.
-
-        href="index.html" betyder, at linket åbner index.html.
-
-        Da index.html ligger i samme mappe som login.html,
-        bruger vi en relativ sti.
-        -->
-
-        <p>
-            <a href="Forside.html">Tilbage til forsiden</a>
-        </p>
-
-
-        <!--
-        OPGAVEDEL 4 – LOGO
-
-        Her indsætter vi vores logo.
-
-        src="logo.png" er en relativ sti til billedet.
-
-        alt beskriver billedet, hvis det ikke kan vises,
-        og hjælper blandt andet brugere med skærmlæsere.
-
-        height="80" gør billedet mindre.
-
-        Vi bruger 80 pixels i højden, fordi opgaven
-        giver dette som eksempel.
-        -->
-
-        <!--
-        Jeg har valgt at gøre logoet til et link,
-        så man kan klikke på logoet og komme tilbage
-        til forsiden.
-        -->
-
-        <a href="index.html">
-
-            <img
-                src="Logo.jpg"
-                alt="Logo for Blodtryksdagbog"
-                height="80"
-            >
-
-        </a>
-
-
-        <!--
-        EKSTRAOPGAVE – LISTE
-
-        Her laver vi en liste over tre ting,
-        som vores app kan bruges til.
-
-        <ul> betyder unordered list,
-        altså en liste uden nummerering.
-
-        <li> bruges til hvert enkelt punkt på listen.
-        -->
-
-        <h2>Hvad kan Blodtryksdagbog bruges til?</h2>
-
-        <ul>
-
-            <li>Registrere blodtryksmålinger</li>
-
-            <li>Se tidligere blodtryksmålinger</li>
-
-            <li>Følge udviklingen i blodtrykket</li>
-
-        </ul>
+        </form>
 
     </main>
-
-
-    <!--
-    EKSTRAOPGAVE – FOOTER
-
-    <footer> bruges til sidens nederste del.
-
-    Her skriver vi en lille tekst om appen.
-    -->
-
-    <footer>
-
-        <p>
-            Blodtryksdagbog – din personlige blodtryksoversigt.
-        </p>
-
-    </footer>
 
 
 </body>
