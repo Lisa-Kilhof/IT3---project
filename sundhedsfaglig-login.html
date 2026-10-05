@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login - Sundhedsfaglig</title>
+
+    <link rel="stylesheet" href="design.css">
+</head>
+
+<body>
+
+    <div class="kort">
+
+        <!-- Titel -->
+        <h1>Smertedagbog</h1>
+
+
+        <!-- Information -->
+        <div class="information">
+
+            <h2>Login for sundhedsfaglige</h2>
+
+            <p>
+                Log ind for at få adgang til patienternes oplysninger
+                og følge udviklingen i deres smerter.
+            </p>
+
+        </div>
+
+
+        <!-- Loginformular -->
+        <form>
+
+            <label for="username">
+                Brugernavn:
+            </label>
+
+            <input type="text"
+                   id="username"
+                   name="username"
+                   placeholder="Indtast brugernavn"
+                   required>
+
+
+            <label for="pwd">
+                Kodeord:
+            </label>
+
+            <input type="password"
+                   id="pwd"
+                   name="pwd"
+                   placeholder="Indtast kodeord"
+                   required>
+
+
+            <button type="button"
+                    onclick="window.location.href='sundhedsfaglig.html'">
+                Log ind
+            </button>
+
+        </form>
+
+
+        <!-- Tilbage -->
+        <button type="button"
+                class="tilbage"
+                onclick="window.location.href='index.html'">
+            Tilbage til forsiden
+        </button>
+
+    </div>
+
+</body>
+
+</html>

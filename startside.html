@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Smertedagbog</title>
+
+    <link rel="stylesheet" href="design.css">
+</head>
+
+<body>
+
+    <div class="kort">
+
+        <!-- Titel -->
+        <h1>Smertedagbog</h1>
+
+
+        <!-- Information -->
+        <div class="information">
+
+            <p>
+                Registrer dine smerter, så du kan følge med i,
+                hvordan dine smerter udvikler sig over tid.
+            </p>
+
+        </div>
+
+
+        <!-- Registrering af smerter -->
+        <form>
+
+            <h2>Registrer dine smerter</h2>
+
+
+            <label for="sted">
+                Hvor har du smerter?
+            </label>
+
+            <input type="text"
+                   id="sted"
+                   name="sted"
+                   placeholder="Fx hoved, ryg eller mave"
+                   required>
+
+
+            <label for="styrke">
+                Hvor stærke er smerterne? (0-10)
+            </label>
+
+            <input type="number"
+                   id="styrke"
+                   name="styrke"
+                   min="0"
+                   max="10"
+                   required>
+
+
+            <label for="beskrivelse">
+                Hvordan føles smerten?
+            </label>
+
+            <input type="text"
+                   id="beskrivelse"
+                   name="beskrivelse"
+                   placeholder="Fx stikkende, dunkende eller brændende">
+
+
+            <label for="varighed">
+                Hvor længe har du haft smerterne?
+            </label>
+
+            <input type="text"
+                   id="varighed"
+                   name="varighed"
+                   placeholder="Fx 2 timer">
+
+
+            <label for="aktivitet">
+                Hvad lavede du, da smerten startede?
+            </label>
+
+            <input type="text"
+                   id="aktivitet"
+                   name="aktivitet"
+                   placeholder="Fx gik, sov eller arbejdede">
+
+
+            <label for="symptomer">
+                Har du andre symptomer?
+            </label>
+
+            <input type="text"
+                   id="symptomer"
+                   name="symptomer"
+                   placeholder="Fx kvalme, svimmelhed eller feber">
+
+
+            <label for="medicin">
+                Har du taget medicin mod smerterne?
+            </label>
+
+            <input type="text"
+                   id="medicin"
+                   name="medicin"
+                   placeholder="Fx Panodil eller ingen medicin">
+
+
+            <label for="effekt">
+                Hjalp medicinen?
+            </label>
+
+            <input type="text"
+                   id="effekt"
+                   name="effekt"
+                   placeholder="Fx ja, lidt eller nej">
+
+
+            <label for="noter">
+                Andre noter
+            </label>
+
+            <textarea id="noter"
+                      name="noter"
+                      placeholder="Skriv andre ting, du synes er relevante"></textarea>
+
+
+            <button type="submit">
+                Gem registrering
+            </button>
+
+        </form>
+
+
+        <!-- Log ud -->
+        <button type="button"
+                class="tilbage"
+                onclick="window.location.href='login.html'">
+            Log ud
+        </button>
+
+    </div>
+
+</body>
+
+</html>

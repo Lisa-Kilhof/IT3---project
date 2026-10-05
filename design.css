@@ -1,0 +1,153 @@
+/* Hele siden */
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #2ba166;
+    color: #222;
+}
+
+
+/* Hovedindhold */
+
+.kort {
+    width: 80%;
+    max-width: 900px;
+    margin: 40px auto;
+    text-align: center;
+}
+
+
+/* Titel */
+
+h1 {
+    background-color: #f1f1f0;
+    padding: 30px;
+    border-radius: 15px;
+    font-size: 40px;
+}
+
+
+/* Informationsfelter */
+
+.information {
+    background-color: #f1f1f0;
+    padding: 30px;
+    margin-top: 30px;
+    border-radius: 15px;
+    font-size: 18px;
+}
+
+
+/* Overskrifter */
+
+h2 {
+    font-size: 28px;
+}
+
+
+/* Formular */
+
+form {
+    background-color: #f1f1f0;
+    padding: 35px;
+    margin-top: 30px;
+    border-radius: 15px;
+    text-align: left;
+}
+
+
+/* Overskrift inde i formularen */
+
+form h2 {
+    text-align: center;
+    font-size: 28px;
+    margin-bottom: 30px;
+}
+
+
+/* Tekst over inputfelter */
+
+label {
+    display: block;
+    font-size: 18px;
+    margin-top: 20px;
+    margin-bottom: 5px;
+}
+
+
+/* Inputfelter */
+
+input,
+textarea {
+    width: 100%;
+    padding: 12px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+
+/* Tekstfelt */
+
+textarea {
+    height: 120px;
+    resize: vertical;
+}
+
+
+/* Knapper */
+
+button {
+    width: 100%;
+    padding: 15px;
+    margin-top: 25px;
+    border: none;
+    border-radius: 8px;
+    background-color: #2ba166;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+
+/* Når musen er over en knap */
+
+button:hover {
+    background-color: #1d790d;
+}
+
+
+/* Tilbage til forsiden-knap */
+
+.tilbage {
+    background-color: #777;
+}
+
+.tilbage:hover {
+    background-color: #555;
+}
+
+
+/* Links */
+
+a {
+    color: #2e72ca;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+
+/* Billede af smertestillende medicin */
+
+.medicin-billede {
+    display: block;
+    width: 70%;
+    max-width: 500px;
+    margin: 0 auto;
+    border-radius: 15px;
+}

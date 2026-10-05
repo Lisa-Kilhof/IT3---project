@@ -1,14 +1,79 @@
-<!DOCTYPE html>>
-<html lang="en">    
+<!DOCTYPE html>
+<html lang="da">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Web Page</title>
-    <link rel="stylesheet" href="styles.css">
+
+    <title>Smertedagbog</title>
+
+    <link rel="stylesheet" href="design.css">
 </head>
+
 <body>
-    <header>
-        <h1>Welcome to My Web Page</h1> 
-    </header>   
+
+    <div class="kort">
+
+        <!-- Titel -->
+        <h1>Smertedagbog</h1>
+
+
+        <!-- Information -->
+        <div class="information">
+
+            <h2>Information</h2>
+
+            <p>
+                Velkommen til Smertedagbogen.
+                Her kan patienter dokumentere deres smerter
+                for at skabe et bedre behandlingsforløb.
+            </p>
+
+            <p>
+                Sundhedsfaglige kan få adgang til patientens data
+                og følge udviklingen i smerterne over tid.
+            </p>
+
+        </div>
+
+
+        <!-- Login -->
+        <div class="information">
+
+            <h2>Login</h2>
+
+            <p>
+                Vælg, hvordan du vil logge ind:
+            </p>
+
+
+            <!-- Patient -->
+            <button type="button"
+                    onclick="window.location.href='login.html'">
+                Login som patient
+            </button>
+
+
+            <!-- Sundhedsfaglig -->
+            <button type="button"
+                    onclick="window.location.href='sundhedsfaglig-login.html'">
+                Login som sundhedsfaglig
+            </button>
+
+        </div>
+
+
+        <!-- GDPR -->
+        <div class="information">
+
+            <p>
+                <a href="gdpr.html">GDPR – læs her</a>
+            </p>
+
+        </div>
+
+    </div>
+
 </body>
+
 </html>
