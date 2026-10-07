@@ -21,13 +21,11 @@
 
         <section class="login-panel">
             <h2>Log ind</h2>
-            <form onsubmit="goToPatient(); return false;">
+            <form id="login-form">
                 <label for="username">Brugernavn</label>
-                <input id="username" name="username" type="text" autocomplete="username" required>
-
+                <input id="username" type="text" required>
                 <label for="password">Adgangskode</label>
-                <input id="password" name="password" type="password" autocomplete="current-password" required>
-
+                <input id="password" type="password" required>
                 <button type="submit">Log ind</button>
             </form>
         </section>

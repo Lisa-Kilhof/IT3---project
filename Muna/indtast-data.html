@@ -14,7 +14,7 @@
         <header>
             <h1>SmerteLog</h1>
 
-            <button class="logout-button" onclick="goToLogin()">
+            <button class="logout-button" button id="logout-button">
                 Log ud
             </button>
         </header>
@@ -45,7 +45,7 @@
                     </p>
                 </div>
 
-                <label>Vælg dit smerteniveau:</label>
+                <p>Vælg dit smerteniveau:</p>
 
                 <div class="pain-scale">
 
@@ -168,8 +168,8 @@
                         <input type="checkbox"
                                id="otherPain"
                                name="painType"
-                               value="Andet"
-                               onchange="showOtherPain()">
+                               value="Andet">
+                               >
                         Andet
                     </label>
 
@@ -250,12 +250,12 @@
 
                 <button
                     class="secondary-button"
-                    onclick="goToPatientList()">
+                    button id="goToPatientList()">
                     Annuller
                 </button>
 
                 <button
-                    onclick="saveRegistration()">
+                    button id="saveRegistration()">
                     Gem registrering
                 </button>
 
