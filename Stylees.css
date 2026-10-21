@@ -1,0 +1,303 @@
+
+ /* Generelt */
+
+body {
+        font-family: Arial, sans-serif;
+        background-color: #f2f8f4;
+        color: #1f3328;
+        margin: 0;
+        }
+/* Hvid boks */
+.boks {
+        max-width: 700px;
+        margin: 60px auto;
+        padding: 30px;
+        background-color: white;
+        text-align: center;
+        }
+/* Loginfelter */
+input {
+        display: block;
+        width: 100%;
+        max-width: 350px;
+        padding: 12px;
+        margin: 10px auto;
+        box-sizing: border-box;
+        font-size: 16px;
+        }
+/* Knapper */
+ button {
+        background-color: #2f6f4e;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        padding: 12px 25px;
+        margin: 10px;
+        cursor: pointer;
+        font-size: 16px;
+        }
+/* Fejlbesked */
+.fejl {
+        color: #1f3328;
+        font-weight: bold;
+        }
+
+/* PATIENTLISTE */
+
+/* Sidens baggrund og skrifttype */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f8f4;
+    color: #1f3328;
+    margin: 0;
+}
+/* Patientlistens hovedområde */
+.patientliste {
+    max-width: 750px;
+    margin: 60px auto;
+    padding: 30px;
+    text-align: center;
+}
+/* Hvide bokse omkring patienterne */
+.patient-oversigt {
+    background-color: white;
+    border: 1px solid #dce9df;
+    border-radius: 10px;
+    padding: 25px;
+    margin: 25px 0;
+    text-align: left;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+/* Patienternes navne */
+.patient-oversigt h3 {
+    font-size: 20px;
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+/* Patient-ID */
+.patient-oversigt p {
+    font-size: 16px;
+    margin-bottom: 15px;
+}
+/* Knapper */
+.patientliste button {
+    background-color: #2f6f4e;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 12px 25px;
+    margin: 10px 0;
+    cursor: pointer;
+    font-size: 16px;
+}
+/* Når musen holdes over knapperne */
+.patientliste button:hover {
+    background-color: #24573d;
+}
+/* Log ud-knappen */
+.patientliste .log-ud {
+    display: block;
+    margin-left: auto;
+    margin-bottom: 30px;
+}
+/*Styles til Detaljesiden*/
+/* PATIENTDETALJER */
+
+.patientdetaljer {
+    max-width: 750px;
+    margin: 60px auto;
+    padding: 30px;
+    text-align: center;
+}
+/* Overskrifter */
+
+.patientdetaljer h1 {
+    font-size: 40px;
+    color: #1f3328;
+    margin-bottom: 25px;
+}
+
+.patientdetaljer h2 {
+    font-size: 30px;
+    color: #1f3328;
+    margin-bottom: 30px;
+}
+
+/* Knapper */
+
+.patientdetaljer button {
+    background-color: #2f6f4e;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 12px 25px;
+    margin: 10px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.patientdetaljer button:hover {
+    background-color: #24573d;
+}
+
+/* Smertedagbog */
+
+.pain-form {
+    text-align: left;
+}
+
+
+/* Tekstfelter i smertedagbogen */
+
+.pain-form textarea {
+    width: 100%;
+    height: 150px;
+    padding: 10px;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    resize: none;
+}
+
+
+/* Smerteintensitet */
+
+.pain-slider {
+    width: 670px;
+    accent-color: #2f6f4e;
+}
+
+
+/* Valg af smertetype */
+
+.pain-types {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    max-width: 100%;
+}
+
+
+/* Checkboxe */
+
+input[type="checkbox"] {
+    accent-color: #2f6f4e;
+}
+
+
+/* Dato og tidspunkt */
+
+.date-time-row {
+    display: flex;
+    gap: 40px;
+    margin-bottom: 25px;
+}
+
+.date-time-row div {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.date-time-row input {
+    padding: 8px;
+    font-size: 16px;
+}
+
+
+/* Gem og luk */
+
+.pain-form button {
+    display: block;
+    margin-top: 25px;
+    padding: 12px 25px;
+    background-color: #2f6f4e;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+}
+/* Tilbage til patientliste */
+.patientdetaljer .tilbage-knap {
+    display: block;
+    margin: 0 0 30px 0;
+    text-align: left;
+}
+
+/* Log ud */
+
+.patientdetaljer .log-ud {
+    display: block;
+    margin-left: auto;
+    margin-bottom: 30px;
+}
+
+
+/* Patientoplysninger */
+
+.patient-info {
+    background-color: white;
+    border: 1px solid #dce9df;
+    border-radius: 10px;
+    padding: 25px;
+    margin: 25px 0;
+    text-align: left;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+/* Patientens navn */
+
+.patientdetaljer .patient-info h3 {
+    font-size: 20px;
+    margin-top: 0;
+    margin-bottom: 10px;
+
+}
+
+/* Patient-ID */
+
+.patientdetaljer .patient-info p {
+    font-size: 16px;
+    margin-bottom: 15px;
+}
+
+/* Registreringer */
+
+.patientdetaljer .registration-card {
+    background-color: white;
+    border: 1px solid #dce9df;
+    border-radius: 10px;
+    padding: 25px;
+    margin: 25px 0;
+    text-align: left;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+
+/* Ny registrering */
+
+.patientdetaljer .new-registration {
+    background-color: white;
+    border: 1px solid #dce9df;
+    border-radius: 10px;
+    padding: 25px;
+    margin: 25px 0;
+    text-align: left;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+/* Tilbageknap øverst til venstre */
+
+.patientdetaljer .tilbage-knap {
+    display: block;
+    margin: 0;
+    margin-right: auto;
+}
+
+
+/* Log ud-knap nederst til venstre */
+
+.patientdetaljer .log-ud {
+    display: block;
+    margin: 30px 0 0 0;
+    margin-right: auto;
+}

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+
+<html lang="da">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patientliste - Smertedagbog</title>
+    <link rel="stylesheet" href="stylees.css">
+    <script src="scriptt.js" defer></script>
+
+    </head>
+    <body>
+        <main class="patientliste">
+            <button type="button" class="log-ud" onclick="logUd()">Log ud</button>
+            <h1>Smertedagbog</h1>
+            <h2>Patientliste</h2>
+            <p>Velkommen til patientlisten</p>
+            <p>Vælg en patient for at se deres registreringer.</p>
+        
+            <div class="patient-oversigt">
+            <h3>Anna Jensen</h3>
+            <p> Patient-ID: 01</p>
+            <button type="button" onclick="visRegistreringer('Anna Jensen')">Vis registreringer
+            </button>
+            </div>
+           
+            <div class="patient-oversigt">
+            <h3>Mads Hansen</h3>
+            <p> Patient-ID: 02</p>
+            <button type="button" onclick="visRegistreringer('Mads Hansen')">Vis registreringer
+            </button>
+           
+        </div>
+        </main>
+        </body>
+</html>

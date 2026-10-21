@@ -3,48 +3,222 @@
 
 <head>
 
-    <!-- Grundlæggende sideindstillinger -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Smertedagbog</title>
 
-    <!-- Fælles CSS -->
-    <link rel="stylesheet" href="styles.css">
+    <style>
+
+        /* Generelt */
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f8f4;
+            color: #1f3328;
+            margin: 0;
+        }
+
+        /* Hvid boks */
+
+        .boks {
+            max-width: 700px;
+            margin: 60px auto;
+            padding: 30px;
+            background-color: white;
+            text-align: center;
+        }
+
+        /* Loginfelter */
+
+        input {
+            display: block;
+            width: 100%;
+            max-width: 350px;
+            padding: 12px;
+            margin: 10px auto;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        /* Knapper */
+
+        button {
+            background-color: #2f6f4e;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 12px 25px;
+            margin: 10px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        /* Fejlbesked */
+
+        .fejl {
+            color: #1f3328;
+            font-weight: bold;
+        }
+
+    </style>
 
 </head>
 
-
 <body>
 
-    <!-- Forside -->
-    <header>
+    <!-- FORSIDE -->
+
+    <div id="forside" class="boks">
 
         <h1>Smertedagbog</h1>
 
-    </header>
+        <h2>Velkommen</h2>
+
+        <p>Vælg, hvordan du vil logge ind.</p>
+
+        <button type="button" onclick="visPatientLogin()">
+            Log ind som patient
+        </button>
+
+        <button type="button" onclick="visPersonaleLogin()">
+            Log ind som sundhedspersonale
+        </button>
+
+    </div>
 
 
-    <!-- Sidens indhold -->
-    <main>
+    <!-- PATIENTLOGIN -->
 
-        <h2>Dokumentér dine smerter</h2>
+    <div id="patientLogin" class="boks" style="display: none;">
 
-        <p>
-            Smertedagbogen giver dig mulighed for at registrere,
-            hvordan du oplever dine smerter, når de opstår.
-        </p>
+        <h1>Log ind</h1>
 
-        <p>
-            Log ind for at oprette en smertelog.
-        </p>
+        <p>Indtast dit patient-ID og din adgangskode.</p>
 
-        <!-- Link til login -->
-        <a href="Login.html" class="button">
+        <input type="text" id="patientID" placeholder="Patient-ID">
+
+        <input type="password" id="patientPassword" placeholder="Adgangskode">
+
+        <button type="button" onclick="loginPatient()">
             Log ind
-        </a>
+        </button>
 
-    </main>
+        <button type="button" onclick="visForside()">
+            Gå tilbage
+        </button>
+
+        <p id="patientFejl" class="fejl"></p>
+
+    </div>
+
+
+    <!-- PERSONALELOGIN -->
+
+    <div id="personaleLogin" class="boks" style="display: none;">
+
+        <h1>Log ind</h1>
+
+        <p>Indtast dit medarbejder-ID og din adgangskode.</p>
+
+        <input type="text" id="medarbejderID" placeholder="Medarbejder-ID">
+
+        <input type="password" id="medarbejderPassword" placeholder="Adgangskode">
+
+        <button type="button" onclick="loginPersonale()">
+            Log ind
+        </button>
+
+        <button type="button" onclick="visForside()">
+            Gå tilbage
+        </button>
+
+        <p id="personaleFejl" class="fejl"></p>
+
+    </div>
+
+
+    <script>
+
+        // Viser patientlogin
+
+        function visPatientLogin() {
+
+            document.getElementById("forside").style.display = "none";
+            document.getElementById("patientLogin").style.display = "block";
+            document.getElementById("personaleLogin").style.display = "none";
+
+        }
+
+
+        // Viser personalelogin
+
+        function visPersonaleLogin() {
+
+            document.getElementById("forside").style.display = "none";
+            document.getElementById("patientLogin").style.display = "none";
+            document.getElementById("personaleLogin").style.display = "block";
+
+        }
+
+
+        // Viser forsiden
+
+        function visForside() {
+
+            document.getElementById("forside").style.display = "block";
+            document.getElementById("patientLogin").style.display = "none";
+            document.getElementById("personaleLogin").style.display = "none";
+
+        }
+
+
+        // Patientlogin
+
+        function loginPatient() {
+
+            const id = document.getElementById("patientID").value;
+            const kode = document.getElementById("patientPassword").value;
+
+            if (id === "1001" && kode === "1234") {
+
+                sessionStorage.setItem("rolle", "patient");
+
+                window.location.href = "Smertedagbog.html";
+
+            } else {
+
+                document.getElementById("patientFejl").textContent =
+                    "Forkert patient-ID eller adgangskode.";
+
+            }
+
+        }
+
+
+        // Personalelogin
+
+        function loginPersonale() {
+
+            const id = document.getElementById("medarbejderID").value;
+            const kode = document.getElementById("medarbejderPassword").value;
+
+            if (id === "2001" && kode === "1234") {
+
+                sessionStorage.setItem("rolle", "personale");
+
+                window.location.href = "Patientliste.html";
+
+            } else {
+
+                document.getElementById("personaleFejl").textContent =
+                    "Forkert medarbejder-ID eller adgangskode.";
+
+            }
+
+        }
+
+    </script>
 
 </body>
 

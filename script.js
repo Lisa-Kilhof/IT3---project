@@ -139,22 +139,40 @@ function gemSmerteLog() {
         stadigSmerter: stadigSmerter
     };
 
-    // Gemmer smerteloggen i localStorage
-    localStorage.setItem("smerteLog", JSON.stringify(smerteLog));
+   // Henter ID på patienten, der er logget ind
+const patientID = sessionStorage.getItem("patientID");
 
-    // Går tilbage til forsiden
-    window.location.href = "index.html";
+// Henter patientens tidligere registreringer
+const registreringer = JSON.parse(
+    localStorage.getItem("registreringer_" + patientID)
+) || [];
+
+// Tilføjer den nye registrering
+registreringer.push(smerteLog);
+
+// Gemmer alle patientens registreringer
+localStorage.setItem(
+    "registreringer_" + patientID,
+    JSON.stringify(registreringer)
+);
+alert("Registrering gemt for patient: " + patientID);
+
+// Går tilbage til login
+window.location.href = "index1.html";
 }
 
 
 // Kontrollerer om patienten er logget ind
 function tjekLogin() {
 
-    const loggedIn = localStorage.getItem("loggedIn");
+    const rolle = sessionStorage.getItem("rolle");
+    const patientID = sessionStorage.getItem("patientID");
 
-    if (loggedIn !== "true") {
+    // Kontrollerer at det er en gyldig patient
+    if (rolle !== "patient" || (patientID !== "01" && patientID !== "02")) {
 
-        window.location.href = "Login.html";
+        window.location.href = "index1.html";
+        return;
 
     }
 }

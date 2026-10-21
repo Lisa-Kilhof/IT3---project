@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smertedagbog - Patientdetaljer</title>
+    <link rel="stylesheet" href="Stylees.css">
+    <script src="scriptt.js" defer></script>
+</head>
+
+<body onload="visPatientDetaljer()">
+    <main class="patientdetaljer">
+        <h1>Smertedagbog</h1>
+       <button type="button" class="tilbage-knap" onclick="window.location.href='PatientListe.html'">
+        ← Tilbage til patientliste
+    </button>
+    <h2>Patientdetaljer</h2>
+        <!-- Patientoplysninger -->
+        <section class="patient-info">
+            <h3 id="patientNavn"></h3>
+            <p>
+                <strong>Patient-ID:</strong>
+                <span id="patientID"></span>
+            </p>
+        </section>
+        <!-- Smerteregistreringer -->
+        <section class="registration-card">
+            <div class="registration-header">
+                <h3>Smerteregistreringer</h3>
+            </div>
+            <div id="patientRegistreringer">
+                <p>Ingen registreringer endnu.</p>
+            </div>
+        </section>
+        <!-- Ny registrering -->
+        <section class="new-registration">
+            <h3>Ny smerteregistrering</h3>
+            <p>
+                Patienten kan oprette en ny registrering efter behov.
+            </p>
+            <p>
+                 En tidligere registrering kan ikke ændres.
+            </p> 
+            <button type="button" onclick="window.location.href='Smertedagbog.html'">
+                + Opret ny smerteregistrering
+            </button>
+        </section>
+        <!-- Log ud -->
+        <button type="button" class="log-ud" onclick="logUd()">
+            Log ud
+        </button>
+    </main>
+</body>
+</html>
