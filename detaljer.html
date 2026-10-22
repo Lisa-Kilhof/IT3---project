@@ -1,0 +1,67 @@
+
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+    <!-- Angiver tegnsættet, så danske bogstaver vises korrekt. -->
+    <meta charset="UTF-8">
+
+    <!-- Sørger for, at siden tilpasser sig skærmens bredde. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Angiver titlen, der vises i browserens fane. -->
+    <title>Smertedagbog - Patientdetaljer</title>
+
+    <!-- Indlæser den fælles CSS-fil, der styrer sidens udseende. -->
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Indlæser JavaScript-funktionerne til visning af patientoplysninger. -->
+    <script src="script.js" defer></script>
+</head>
+
+<!-- Når siden indlæses, kontrollerer JavaScript login og viser
+     oplysningerne for den valgte patient. -->
+<body onload="visPatientDetaljer()">
+
+    <!-- Hovedområdet indeholder patientoplysninger og registreringer. -->
+    <main>
+
+        <!-- Øverste del af siden med overskrift og patientoplysninger. -->
+        <header>
+            <h1>Patientdetaljer</h1>
+
+            <!-- JavaScript indsætter den valgte patients navn her. -->
+            <h2 id="patientNavn"></h2>
+
+            <!-- JavaScript indsætter den valgte patients ID her. -->
+            <p id="patientID"></p>
+        </header>
+
+        <!-- Område til visning af patientens tidligere registreringer.
+             JavaScript henter registreringerne og indsætter dem her. -->
+        <section>
+            <h2>Smerteregistreringer</h2>
+
+            <!-- Dette område udfyldes automatisk med patientens
+                 registreringer fra browserens localStorage. -->
+            <div id="patientRegistreringer"></div>
+        </section>
+
+        <!-- Linket fører tilbage til listen over patienter. -->
+        <a href="patientliste.html" class="tilbage-knap">
+            Tilbage til patientlisten
+        </a>
+
+        <!-- Logger sundhedspersonalet ud og sender brugeren til forsiden. -->
+        <button
+            type="button"
+            class="sekundaer-knap"
+            onclick="logUd()"
+        >
+            Log ud
+        </button>
+
+    </main>
+
+</body>
+</html>

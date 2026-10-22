@@ -3,190 +3,234 @@
 <html lang="da">
 
 <head>
-
-    <!-- Grundlæggende sideindstillinger -->
+    <!-- Angiver tegnsættet, så danske bogstaver vises korrekt. -->
     <meta charset="UTF-8">
+
+    <!-- Sørger for, at siden tilpasser sig skærmens bredde. -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Smertedagbog</title>
+    <!-- Angiver titlen, der vises i browserens fane. -->
+    <title>Smertedagbog - Registrering</title>
 
-    <!-- Fælles CSS -->
+    <!-- Indlæser den fælles CSS-fil, som bestemmer sidens udseende. -->
     <link rel="stylesheet" href="styles.css">
 
-    <!-- JavaScript -->
+    <!-- Indlæser JavaScript-funktionerne til login og smerteregistrering. -->
     <script src="script.js" defer></script>
-
 </head>
 
+<!-- Kontrollerer, at brugeren er logget ind som patient,
+     før patientens smerteformular vises. -->
+<body onload="tjekPatientLogin()">
 
-<body onload="tjekLogin()">
-
-    <!-- Smertedagbog -->
+    <!-- Hovedområdet indeholder hele smerteformularen. -->
     <main class="pain-form">
 
+        <!-- Log ud-knappen sender patienten tilbage til forsiden. -->
+        <button type="button" class="sekundaer-knap" onclick="logUd()">
+            Log ud
+        </button>
+
+        <!-- Overskrift og introduktion til smerteregistreringen. -->
         <h1>Smertedagbog</h1>
+        <p>Udfyld oplysningerne om dine smerter nedenfor.</p>
 
-        <h2>Beskriv din smerteoplevelse</h2>
+        <!-- Formularen samler de oplysninger, patienten indtaster.
+             JavaScript håndterer validering og gemning ved indsendelse. -->
+        <form id="smerteForm">
 
-        <p>
-            Skriv med dine egne ord, hvordan du oplever dine smerter.
-        </p>
+            <!-- PATIENTENS EGEN BESKRIVELSE -->
 
-        <!-- Tekstfelt til patientens egen beskrivelse -->
-        <textarea
-            id="painDescription"
-            placeholder="Beskriv din smerteoplevelse..."
-        ></textarea>
-
-
-        <!-- Smerteintensitet -->
-        <h2>Hvor stærk er smerten?</h2>
-
-        <p>Vælg et tal fra 0 til 10.</p>
-
-        <input
-            type="range"
-            id="painIntensity"
-            class="pain-slider"
-            min="0"
-            max="10"
-            value="0"
-            oninput="opdaterIntensitet()"
-        >
-
-        <span id="intensityValue">0</span>
-
-        <p>0 = Ingen smerte &nbsp;&nbsp;&nbsp; 10 = Værst tænkelige smerte</p>
-
-
-        <!-- Beskrivelse af smertens karakter -->
-        <h2>Hvordan føles smerten?</h2>
-
-        <p>Du kan vælge flere beskrivelser.</p>
-
-        <!-- Valg af smertetype -->
-        <div class="pain-types">
-
-            <label>
-                <input type="checkbox" name="painType" value="Stikkende">
-                Stikkende
-            </label>
-
-            <label>
-                <input type="checkbox" name="painType" value="Borende">
-                Borende
-            </label>
-
-            <label>
-                <input type="checkbox" name="painType" value="Brændende">
-                Brændende
-            </label>
-
-            <label>
-                <input type="checkbox" name="painType" value="Dunkende">
-                Dunkende
-            </label>
-
-            <label>
-                <input type="checkbox" name="painType" value="Trykkende">
-                Trykkende
-            </label>
-
-            <label>
-                <input type="checkbox" name="painType" value="Skærende">
-                Skærende
-            </label>
-
-            <label>
-                <input type="checkbox" name="painType" value="Murrende">
-                Murrende
-            </label>
-
-            <label>
-                <input type="checkbox" id="otherPainType" name="painType" value="Andet">
-                Andet
-            </label>
-
-        </div>
-
-
-        <!-- Tekstfelt til egen beskrivelse -->
-        <div id="otherPainText" style="display: none;">
-
-            <label for="otherPainDescription">
-                Beskriv venligst:
-            </label>
+            <!-- Giver patienten mulighed for at beskrive smerterne med egne ord. -->
+            <h2>Beskriv din smerteoplevelse</h2>
+            <p>Skriv med dine egne ord, hvordan du oplever dine smerter.</p>
 
             <textarea
-                id="otherPainDescription"
-                placeholder="Beskriv hvordan smerten føles..."
+                id="painDescription"
+                placeholder="Beskriv din smerteoplevelse..."
+                required
             ></textarea>
 
-        </div>
 
+            <!-- SMERTEINTENSITET -->
 
-        <!-- Placering af smerte -->
-        <h2>Hvor sidder smerten?</h2>
+            <!-- Patienten vurderer smerten på en skala fra 0 til 10. -->
+            <h2>Hvor stærk er smerten?</h2>
+            <p>Vælg et tal fra 0 til 10.</p>
 
-        <p>
-            Beskriv så præcist som muligt, hvor smerten/smerterne sidder.
-        </p>
+            <!-- En range-input giver en skyder til valg af smerteintensitet.
+                 oninput kalder JavaScript, når skyderens værdi ændres. -->
+            <div class="slider-række">
+                <input
+                    type="range"
+                    id="painIntensity"
+                    min="0"
+                    max="10"
+                    value="0"
+                    oninput="opdaterIntensitet()"
+                >
 
-        <textarea
-            id="painLocation"
-            placeholder="Beskriv hvor smerten/smerterne sidder..."
-        ></textarea>
-
-
-        <!-- Varighed af smerte -->
-        <h2>Hvor længe har du haft smerterne?</h2>
-
-        <p>Hvornår begyndte smerterne?</p>
-
-        <div class="date-time-row">
-
-            <div>
-                <label for="painStartDate">Startdato:</label>
-                <input type="date" id="painStartDate">
+                <!-- Viser det tal, som patienten har valgt på skyderen. -->
+                <output id="intensityValue" for="painIntensity">0</output>
             </div>
 
-            <div>
-                <label for="painStartTime">Starttidspunkt:</label>
-                <input type="time" id="painStartTime" lang="da-DK">
+            <!-- Forklarer betydningen af skalaens yderpunkter. -->
+            <p>0 = Ingen smerte · 10 = Værst tænkelige smerte</p>
+
+
+            <!-- SMERTETYPER -->
+
+            <!-- Patienten kan vælge flere beskrivelser af smertens karakter. -->
+            <h2>Hvordan føles smerten?</h2>
+            <p>Du kan vælge flere beskrivelser.</p>
+
+            <!-- Samler afkrydsningsfelterne for de forskellige smertetyper. -->
+            <div class="pain-types">
+
+                <!-- Hvert felt har samme name, så JavaScript kan finde
+                     alle valgte smertetyper samlet. -->
+                <label>
+                    <input type="checkbox" name="painType" value="Stikkende">
+                    Stikkende
+                </label>
+
+                <label>
+                    <input type="checkbox" name="painType" value="Borende">
+                    Borende
+                </label>
+
+                <label>
+                    <input type="checkbox" name="painType" value="Brændende">
+                    Brændende
+                </label>
+
+                <label>
+                    <input type="checkbox" name="painType" value="Dunkende">
+                    Dunkende
+                </label>
+
+                <label>
+                    <input type="checkbox" name="painType" value="Trykkende">
+                    Trykkende
+                </label>
+
+                <label>
+                    <input type="checkbox" name="painType" value="Skærende">
+                    Skærende
+                </label>
+
+                <label>
+                    <input type="checkbox" name="painType" value="Murrende">
+                    Murrende
+                </label>
+
+                <!-- Hvis patienten vælger "Andet", vises et ekstra tekstfelt. -->
+                <label>
+                    <input
+                        type="checkbox"
+                        id="otherPainType"
+                        name="painType"
+                        value="Andet"
+                    >
+                    Andet
+                </label>
+
             </div>
 
-        </div>
 
-        <p>Hvornår stoppede smerterne?</p>
+            <!-- EKSTRA BESKRIVELSE VED "ANDET" -->
 
-        <div class="date-time-row">
+            <!-- Feltet er skjult fra starten.
+                 JavaScript viser det, når patienten vælger "Andet". -->
+            <div id="otherPainText" hidden>
 
-            <div>
-                <label for="painEndDate">Slutdato:</label>
-                <input type="date" id="painEndDate">
+                <!-- Etiket, der forklarer, hvad patienten skal skrive. -->
+                <label for="otherPainDescription">Beskriv venligst:</label>
+
+                <!-- Patienten kan uddybe, hvordan smerten føles. -->
+                <textarea
+                    id="otherPainDescription"
+                    placeholder="Beskriv hvordan smerten føles..."
+                ></textarea>
+
             </div>
 
-            <div>
-                <label for="painEndTime">Sluttidspunkt:</label>
-                <input type="time" id="painEndTime" lang="da-DK">
+
+            <!-- SMERTENS PLACERING -->
+
+            <!-- Patienten beskriver, hvor på kroppen smerten sidder. -->
+            <h2>Hvor sidder smerten?</h2>
+
+            <textarea
+                id="painLocation"
+                placeholder="Beskriv hvor smerten sidder..."
+                required
+            ></textarea>
+
+
+            <!-- SMERTENS VARIGHED -->
+
+            <!-- Registrerer, hvornår smerterne begyndte. -->
+            <h2>Hvor længe har du haft smerterne?</h2>
+
+            <!-- Samler felterne til startdato og starttidspunkt. -->
+            <div class="date-time-row">
+
+                <div>
+                    <label for="painStartDate">Startdato</label>
+                    <input type="date" id="painStartDate" required>
+                </div>
+
+                <div>
+                    <label for="painStartTime">Starttidspunkt</label>
+                    <input type="time" id="painStartTime" required>
+                </div>
+
             </div>
 
-        </div>
 
-        <label>
-            
-        <input type="checkbox" id="painOngoing">
-        Smerterne er ikke stoppet endnu
-        </label>
+            <!-- ANGIVELSE AF, OM SMERTERNE STADIG ER I GANG -->
+
+            <!-- Når feltet markeres, skjules felterne til slutdato og sluttid. -->
+            <label class="checkbox-række">
+                <input
+                    type="checkbox"
+                    id="painOngoing"
+                    onchange="visSluttid()"
+                >
+                Smerterne er ikke stoppet endnu
+            </label>
+
+            <!-- Indeholder felterne til registrering af smertens afslutning.
+                 JavaScript skjuler området, hvis smerterne fortsætter. -->
+            <div id="slutTidFelter" class="date-time-row">
+
+                <div>
+                    <label for="painEndDate">Slutdato</label>
+                    <input type="date" id="painEndDate">
+                </div>
+
+                <div>
+                    <label for="painEndTime">Sluttidspunkt</label>
+                    <input type="time" id="painEndTime">
+                </div>
+
+            </div>
 
 
-        <!-- Gem og luk -->
-        <button type="button" onclick="gemSmerteLog()">
-            Gem og luk
-        </button>
+            <!-- FEJLBESKEDER OG GEMNING -->
+
+            <!-- JavaScript viser fejl her, hvis oplysninger mangler,
+                 eller hvis registreringen ikke kan gemmes. -->
+            <p id="smerteFejl" class="fejl" role="alert"></p>
+
+            <!-- Indsender formularen, så JavaScript kan kontrollere
+                 oplysningerne og gemme smerteregistreringen. -->
+            <button type="submit">Gem registrering</button>
+
+        </form>
 
     </main>
 
 </body>
-
 </html>

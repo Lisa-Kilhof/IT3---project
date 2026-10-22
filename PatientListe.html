@@ -1,37 +1,99 @@
-<!DOCTYPE html>
 
+<!DOCTYPE html>
 <html lang="da">
 
 <head>
+    <!-- Angiver tegnsættet, så danske bogstaver vises korrekt. -->
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Patientliste - Smertedagbog</title>
-    <link rel="stylesheet" href="stylees.css">
-    <script src="scriptt.js" defer></script>
 
-    </head>
-    <body>
-        <main class="patientliste">
-            <button type="button" class="log-ud" onclick="logUd()">Log ud</button>
-            <h1>Smertedagbog</h1>
-            <h2>Patientliste</h2>
-            <p>Velkommen til patientlisten</p>
-            <p>Vælg en patient for at se deres registreringer.</p>
-        
-            <div class="patient-oversigt">
-            <h3>Anna Jensen</h3>
-            <p> Patient-ID: 01</p>
-            <button type="button" onclick="visRegistreringer('Anna Jensen')">Vis registreringer
-            </button>
-            </div>
-           
-            <div class="patient-oversigt">
-            <h3>Mads Hansen</h3>
-            <p> Patient-ID: 02</p>
-            <button type="button" onclick="visRegistreringer('Mads Hansen')">Vis registreringer
-            </button>
-           
-        </div>
-        </main>
-        </body>
+    <!-- Sørger for, at siden tilpasser sig skærmens bredde. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Angiver titlen, der vises i browserens fane. -->
+    <title>Smertedagbog - Patientliste</title>
+
+    <!-- Indlæser CSS-filen, der bestemmer sidens udseende. -->
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Indlæser JavaScript-funktionerne til patientlisten. -->
+    <script src="script.js" defer></script>
+</head>
+
+<!-- Kontrollerer, at brugeren er logget ind som sundhedspersonale,
+     før patientlisten vises. -->
+<body onload="tjekPersonaleLogin()">
+
+    <!-- Hovedområdet indeholder patientlisten. -->
+    <main>
+
+        <!-- Samler overskrift og introduktion til siden. -->
+        <header>
+            <h1>Patientliste</h1>
+
+            <!-- Forklarer, hvad sundhedspersonalet kan gøre på siden. -->
+            <p>Vælg en patient for at se vedkommendes smerteregistreringer.</p>
+        </header>
+
+        <!-- Viser de patienter, som sundhedspersonalet kan vælge imellem. -->
+        <section class="patientliste">
+
+            <!-- PATIENT 1 -->
+
+            <!-- Hvert patientkort viser patientens navn og ID.
+                 Knappen sender patientens navn til JavaScript-funktionen
+                 visRegistreringer(), som åbner patientens registreringer. -->
+            <article class="patientkort">
+
+                <h2>Anna Jensen</h2>
+
+                <!-- Patientens ID bruges til at finde registreringerne. -->
+                <p>Patient-ID: 01</p>
+
+                <!-- Åbner siden med Annas smerteregistreringer. -->
+                <button
+                    type="button"
+                    onclick="visRegistreringer('Anna Jensen')"
+                >
+                    Se registreringer
+                </button>
+
+            </article>
+
+
+            <!-- PATIENT 2 -->
+
+            <!-- Dette kort fungerer på samme måde som det første,
+                 men viser oplysningerne for en anden patient. -->
+            <article class="patientkort">
+
+                <h2>Mads Hansen</h2>
+
+                <!-- Patientens ID bruges til at finde registreringerne. -->
+                <p>Patient-ID: 02</p>
+
+                <!-- Åbner siden med Mads' smerteregistreringer. -->
+                <button
+                    type="button"
+                    onclick="visRegistreringer('Mads Hansen')"
+                >
+                    Se registreringer
+                </button>
+
+            </article>
+
+        </section>
+
+        <!-- Log ud-knappen rydder loginoplysningerne og sender
+             sundhedspersonalet tilbage til forsiden. -->
+        <button
+            type="button"
+            class="sekundaer-knap"
+            onclick="logUd()"
+        >
+            Log ud
+        </button>
+
+    </main>
+
+</body>
 </html>

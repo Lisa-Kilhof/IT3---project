@@ -1,147 +1,348 @@
 
-/* Generelt */
+/* =========================================
+   GENERELT
+   ========================================= */
 
+/* Gør, at padding og kanter tælles med i elementets samlede bredde. */
+* {
+    box-sizing: border-box;
+}
+
+/* Bestemmer skrifttype, baggrundsfarve, tekstfarve og afstande på hele siden. */
 body {
     font-family: Arial, sans-serif;
     background-color: #f2f8f4;
     color: #1f3328;
     margin: 0;
+    line-height: 1.5;
 }
 
-
-/* Header */
-
-header {
-    background-color: #2f6f4e;
-    color: white;
-    text-align: center;
-    padding: 25px;
-}
-
-
-/* Indhold */
-
+/* Bestemmer bredden, placeringen og den indvendige afstand for hovedindholdet. */
 main {
+    width: min(100% - 32px, 750px);
+    margin: 40px auto;
+    padding: 30px;
+}
+
+/* Bestemmer størrelse, centrering og afstand for sidernes hovedoverskrifter. */
+h1 {
+    font-size: 36px;
+    text-align: center;
+    margin-top: 0;
+}
+
+/* Giver underoverskrifter ekstra afstand fra indholdet ovenfor. */
+h2 {
+    margin-top: 28px;
+}
+
+/* Bestemmer linjeafstanden i almindelige tekstafsnit. */
+p {
+    line-height: 1.6;
+}
+
+
+/* =========================================
+   FORSIDE OG LOGIN
+   ========================================= */
+
+/* Giver forsiden og loginboksen en hvid baggrund, afrundede hjørner
+   og en let skygge. Boksen centreres på siden. */
+.forside,
+.login-container {
     max-width: 700px;
     margin: 60px auto;
     padding: 30px;
     background-color: white;
     text-align: center;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
 }
 
+/* Placerer loginmulighederne under hinanden og centrerer dem. */
+.login-valg {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-top: 25px;
+}
 
-/* Smertedagbog */
-
-.pain-form {
+/* Begrænser bredden på loginboksen og venstrejusterer dens indhold. */
+.login-card {
+    max-width: 400px;
+    margin: 25px auto 0;
     text-align: left;
 }
 
+/* Centrerer overskrifter og direkte tekstafsnit inde i loginboksen. */
+.login-card h2,
+.login-card > p {
+    text-align: center;
+}
 
-/* Tekstfelter i smertedagbogen */
+/* Viser etiketter som separate linjer over deres inputfelter. */
+label {
+    display: block;
+    margin-bottom: 6px;
+}
 
-.pain-form textarea {
+/* Giver almindelige inputfelter og tekstområder ensartet størrelse,
+   indvendig afstand, kant og afrundede hjørner.
+   Afkrydsningsfelter og skydere undtages fra denne regel. */
+input:not([type="checkbox"]):not([type="range"]),
+textarea {
     width: 100%;
-    height: 150px;
-    padding: 10px;
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
+    padding: 12px;
+    margin: 6px 0 16px;
+    border: 1px solid #cbd9ce;
+    border-radius: 5px;
+    font: inherit;
+}
+
+/* Bestemmer minimumshøjden og ændrer størrelsen på tekstområder.
+   Brugeren kan ændre højden lodret. */
+textarea {
+    min-height: 130px;
+    resize: vertical;
+}
+
+/* Giver inputfelter og tekstområder en tydelig grøn markering,
+   når brugeren klikker på dem eller vælger dem med tastaturet. */
+input:focus,
+textarea:focus {
+    outline: 2px solid #72a98a;
+    outline-offset: 1px;
+}
+
+/* Bestemmer knappernes farver, størrelse, afstand og musemarkør. */
+button {
+    background-color: #2f6f4e;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 12px 25px;
+    margin: 10px 0;
+    cursor: pointer;
     font-size: 16px;
-    resize: none;
+}
+
+/* Gør knappernes baggrund mørkere, når musen holdes over dem. */
+button:hover {
+    background-color: #24573d;
+}
+
+/* Gør fokuserede knapper og links tydeligere for brugere,
+   der navigerer med tastaturet. */
+button:focus-visible,
+a:focus-visible {
+    outline: 3px solid #72a98a;
+    outline-offset: 3px;
+}
+
+/* Bestemmer standardfarven på links. */
+a {
+    color: #24573d;
+}
+
+/* Fremhæver fejlmeddelelser med rød tekst og fed skrift. */
+.fejl {
+    color: #a32323;
+    font-weight: bold;
 }
 
 
-/* Smerteintensitet */
+/* =========================================
+   SMERTEFORMULAR
+   ========================================= */
 
-.pain-slider {
-    width: 670px;
+/* Venstrejusterer formularens indhold og giver den en hvid baggrund,
+   afrundede hjørner og en let skygge. */
+.pain-form {
+    text-align: left;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+/* Sørger for, at hovedoverskriften i smerteformularen er centreret. */
+.pain-form > h1 {
+    text-align: center;
+}
+
+/* Placerer skyderen til smerteintensitet og dens værdi på samme linje. */
+.slider-række {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+/* Gør smerteintensitetens skyder bred og giver den en grøn accentfarve. */
+.pain-slider,
+.slider-række input[type="range"] {
+    width: 100%;
     accent-color: #2f6f4e;
 }
 
+/* Sørger for, at tallet ved siden af skyderen har plads
+   og fremstår tydeligt med større, fed skrift. */
+#intensityValue {
+    min-width: 30px;
+    font-weight: bold;
+    font-size: 20px;
+}
 
-/* Valg af smertetype */
-
+/* Viser valgmulighederne for smertetyper i to kolonner
+   med afstand både mellem rækker og kolonner. */
 .pain-types {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 10px;
-    max-width: 100%;
+    margin: 15px 0 25px;
 }
 
-
-/* Checkboxe */
-
-input[type="checkbox"] {
-    accent-color: #2f6f4e;
-}
-
-
-/* Dato og tidspunkt */
-
-.date-time-row {
-    display: flex;
-    gap: 40px;
-    margin-bottom: 25px;
-}
-
-.date-time-row div {
+/* Placerer afkrydsningsfelter og deres tekst ved siden af hinanden
+   og sørger for, at de flugter lodret. */
+.pain-types label,
+.checkbox-række {
     display: flex;
     align-items: center;
     gap: 8px;
 }
 
-.date-time-row input {
-    padding: 8px;
-    font-size: 16px;
+/* Giver afkrydsningsfelter en grøn accentfarve og faste dimensioner.
+   flex-shrink forhindrer, at felterne bliver klemt sammen. */
+input[type="checkbox"] {
+    accent-color: #2f6f4e;
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
 }
 
-
-/* Gem og luk */
-
-.pain-form button {
-    display: block;
-    margin-top: 25px;
-    padding: 12px 25px;
-    background-color: #2f6f4e;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-
-/* Login-knap */
-
-.button {
-    display: inline-block;
-    background-color: #2f6f4e;
-    color: white;
-    text-decoration: none;
-    padding: 12px 25px;
-    margin-top: 20px;
-    border-radius: 6px;
-}
-
-
-/* Loginformular */
-
-form {
+/* Placerer dato- og tidsgrupper ved siden af hinanden
+   og giver dem luft omkring sig. */
+.date-time-row {
     display: flex;
-    flex-direction: column;
-    gap: 10px;
-    max-width: 350px;
-    margin: 30px auto;
+    gap: 20px;
+    margin: 15px 0 25px;
 }
 
-form input {
-    padding: 10px;
+/* Lader hver gruppe med dato eller tidspunkt dele den tilgængelige plads.
+   min-width: 0 gør det muligt for gruppen at blive smallere. */
+.date-time-row > div {
+    flex: 1;
+    min-width: 0;
 }
 
-form button {
-    padding: 10px;
-    background-color: #2f6f4e;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
+/* Sørger for, at inputfelterne fylder hele bredden af deres gruppe. */
+.date-time-row input {
+    width: 100%;
+}
+
+/* Skjuler felterne til anden smertetype og sluttidspunkt,
+   når de har HTML-attributten hidden. */
+#otherPainText[hidden],
+#slutTidFelter[hidden] {
+    display: none;
+}
+
+
+/* =========================================
+   PATIENTLISTE OG PATIENTDETALJER
+   ========================================= */
+
+/* Fjerner en eventuel særskilt baggrund og centrerer indholdet
+   på patientlisten og patientdetaljesiden. */
+.patientliste,
+.patientdetaljer {
+    background-color: transparent;
+    text-align: center;
+}
+
+/* Giver patientkort, patientoplysninger og registreringskort
+   en fælles hvid baggrund, kant, indvendig afstand og skygge. */
+.patient-oversigt,
+.patient-info,
+.registration-card,
+.new-registration {
+    background-color: white;
+    border: 1px solid #dce9df;
+    border-radius: 10px;
+    padding: 25px;
+    margin: 25px 0;
+    text-align: left;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+/* Fjerner den øverste margen på overskrifterne i patientkort
+   og patientoplysninger. */
+.patient-oversigt h3,
+.patient-info h3 {
+    margin-top: 0;
+}
+
+/* Giver hver smerteregistrering en lys baggrund, en tynd kant,
+   afrundede hjørner og afstand til de øvrige registreringer.
+   overflow-wrap forhindrer lange ord i at sprænge boksen. */
+.registration-item {
+    background-color: #f8fbf8;
+    border: 1px solid #dce9df;
+    border-radius: 8px;
+    padding: 16px;
+    margin: 16px 0;
+    overflow-wrap: anywhere;
+}
+
+/* Fjerner den øverste margen på overskriften i en registrering. */
+.registration-item h4 {
+    margin-top: 0;
+}
+
+/* Sørger for, at linket tilbage til patientlisten vises på sin egen linje. */
+.tilbage-knap {
+    display: block;
+}
+
+/* Placerer log ud-knappen som et blokelement og skubber den mod højre. */
+.log-ud {
+    display: block;
+    margin-left: auto;
+}
+
+/* Fjerner den nederste margen fra knapper inde i en ny registrering. */
+.new-registration button {
+    margin-bottom: 0;
+}
+
+
+/* =========================================
+   MOBILVISNING
+   ========================================= */
+
+/* Reglerne i denne blok gælder kun, når skærmen er højst 600 pixels bred. */
+@media (max-width: 600px) {
+
+    /* Reducerer afstandene omkring hovedindholdet på små skærme. */
+    main,
+    .forside,
+    .login-container {
+        margin: 16px auto;
+        padding: 20px;
+    }
+
+    /* Gør hovedoverskrifterne mindre, så de passer bedre på mobil. */
+    h1 {
+        font-size: 29px;
+    }
+
+    /* Placerer dato- og tidsfelter under hinanden på smalle skærme. */
+    .date-time-row {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    /* Beholder to kolonner til smertetyper på mobilskærme. */
+    .pain-types {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
 }

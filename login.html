@@ -1,0 +1,86 @@
+
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+    <!-- Angiver tegnsættet, så danske bogstaver vises korrekt. -->
+    <meta charset="UTF-8">
+
+    <!-- Tilpasser sidens bredde til mobil, tablet og computer. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Angiver titlen, der vises i browserens fane. -->
+    <title>Log ind - Smertedagbog</title>
+
+    <!-- Indlæser den fælles CSS-fil, som styrer sidens udseende. -->
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Indlæser JavaScript-filen, der håndterer login og brugerroller.
+         defer sørger for, at scriptet udføres efter HTML-dokumentet er indlæst. -->
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+
+    <!-- Hovedområdet indeholder loginoverskriften og loginformularen. -->
+    <main class="login-container">
+
+        <!-- Viser navnet på systemet. -->
+        <h1>Smertedagbog</h1>
+
+        <!-- Samler loginfelterne og den tilhørende information. -->
+        <section class="login-card">
+
+            <!-- Overskriften ændres med JavaScript,
+                 afhængigt af om brugeren er patient eller personale. -->
+            <h2 id="loginTitel">Log ind</h2>
+
+            <!-- Beskrivelsen tilpasses også den valgte brugerrolle. -->
+            <p id="loginBeskrivelse">Indtast dine loginoplysninger.</p>
+
+            <!-- Formularen indeholder brugerens loginoplysninger.
+                 JavaScript håndterer indsendelsen af formularen. -->
+            <form id="loginForm">
+
+                <!-- Etiket, der fortæller brugeren, hvad der skal indtastes. -->
+                <label for="brugerID">Bruger-ID</label>
+
+                <!-- Tekstfelt til patientens eller medarbejderens ID.
+                     JavaScript kan ændre pladsholderteksten efter brugerrollen. -->
+                <input
+                    type="text"
+                    id="brugerID"
+                    placeholder="Indtast dit bruger-ID"
+                    required
+                >
+
+                <!-- Etiket til adgangskodefeltet. -->
+                <label for="adgangskode">Adgangskode</label>
+
+                <!-- Adgangskoden skjules, mens brugeren skriver den. -->
+                <input
+                    type="password"
+                    id="adgangskode"
+                    placeholder="Indtast din adgangskode"
+                    required
+                >
+
+                <!-- Indsender loginformularen.
+                     JavaScript kontrollerer oplysningerne og håndterer login. -->
+                <button type="submit">Log ind</button>
+
+                <!-- JavaScript viser en fejlbesked her,
+                     hvis loginoplysningerne ikke er korrekte. -->
+                <p id="loginFejl" class="fejl" role="alert"></p>
+
+            </form>
+
+            <!-- Link, der sender brugeren tilbage til forsiden. -->
+            <a href="index.html">Tilbage til forsiden</a>
+
+        </section>
+
+    </main>
+
+</body>
+</html>

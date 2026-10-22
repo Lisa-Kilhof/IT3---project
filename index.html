@@ -1,0 +1,58 @@
+
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+    <!-- Angiver tegnsættet, så danske bogstaver vises korrekt. -->
+    <meta charset="UTF-8">
+
+    <!-- Tilpasser sidens bredde til skærmen på mobil, tablet og computer. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Angiver titlen, som vises i browserens fane. -->
+    <title>Smertedagbog</title>
+
+    <!-- Indlæser den fælles CSS-fil, som styrer sidens udseende. -->
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Indlæser JavaScript-filen, som håndterer sidens funktioner. -->
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+
+    <!-- Hovedområdet indeholder forsiden og dens indhold. -->
+    <main class="forside">
+
+        <!-- Sidens hovedoverskrift med navnet på systemet. -->
+        <h1>Smertedagbog</h1>
+
+        <!-- Introducerer brugeren til systemet. -->
+        <h2>Velkommen</h2>
+
+        <!-- Forklarer, at brugeren skal vælge sin brugerrolle. -->
+        <p>Vælg, hvordan du vil logge ind.</p>
+
+        <!-- Samler knapperne, så brugeren kan vælge sin brugerrolle. -->
+        <div class="login-valg">
+
+            <!-- Åbner login-siden med patientrollen valgt. -->
+            <button
+                type="button"
+                onclick="window.location.href='login.html?rolle=patient'">
+                Log ind som patient
+            </button>
+
+            <!-- Åbner login-siden med personalerollen valgt. -->
+            <button
+                type="button"
+                onclick="window.location.href='login.html?rolle=personale'">
+                Log ind som sundhedspersonale
+            </button>
+
+        </div>
+
+    </main>
+
+</body>
+</html>
