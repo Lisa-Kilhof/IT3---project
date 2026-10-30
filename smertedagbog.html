@@ -19,6 +19,32 @@
     <script src="script.js" defer></script>
 </head>
 
+<!-- Bekræftelsesboks ved manglende oplysninger -->
+<div id="gemDialogOverlay" class="gem-dialog-overlay" hidden>
+    <div class="gem-dialog" role="dialog" aria-modal="true"
+         aria-labelledby="gemDialogTitel">
+
+        <div class="gem-dialog-ikon">!</div>
+
+        <h2 id="gemDialogTitel">Vil du gemme og lukke?</h2>
+
+        <p id="gemDialogBesked">
+            Du mangler at udfylde nogle felter.
+            Vil du gemme registreringen alligevel?
+        </p>
+
+        <div class="gem-dialog-knapper">
+            <button type="button" id="annullerGem" class="gem-knap-annuller">
+                Annuller og gå tilbage
+            </button>
+
+            <button type="button" id="bekraeftGem" class="gem-knap-gem">
+                Gem og luk alligevel
+            </button>
+        </div>
+    </div>
+</div>
+
 <!-- Kontrollerer, at brugeren er logget ind som patient,
      før patientens smerteformular vises. -->
 <body onload="tjekPatientLogin()">
@@ -37,7 +63,7 @@
 
         <!-- Formularen samler de oplysninger, patienten indtaster.
              JavaScript håndterer validering og gemning ved indsendelse. -->
-        <form id="smerteForm">
+        <form id="smerteForm" novalidate>
 
             <!-- PATIENTENS EGEN BESKRIVELSE -->
 

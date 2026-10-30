@@ -243,10 +243,11 @@ function visAndetFelt() {
 
 // Henter, kontrollerer og gemmer patientens smerteregistrering.
 // Funktionen kaldes, når patienten indsender smerteformularen.
-function gemSmerteLog(event) {
+// Hvis der mangler oplysninger, vises den tilpassede dialogboks.
+function gemSmerteLog(event, gemAlligevel = false) {
 
     // Forhindrer formularen i at genindlæse siden.
-    event.preventDefault();
+    if (event) event.preventDefault();
 
     // Henter ID'et på den patient, der er logget ind.
     const patientID = sessionStorage.getItem("patientID");
@@ -265,29 +266,20 @@ function gemSmerteLog(event) {
         return;
     }
 
+    // Fjerner en tidligere fejlbesked.
+    if (fejl) fejl.textContent = "";
+
     // Finder alle afkrydsningsfelter for smertetyper,
     // som patienten har valgt.
     const smertetyper = Array.from(
         document.querySelectorAll('input[name="painType"]:checked')
     ).map(felt => felt.value);
 
-    // Patienten skal vælge mindst én smertetype.
-    if (smertetyper.length === 0) {
-        fejl.textContent = "Vælg mindst én beskrivelse af smerten.";
-        return;
-    }
-
     // Kontrollerer, om smerterne stadig er i gang.
     const stadigSmerter = document.getElementById("painOngoing").checked;
 
     // Henter patientens eventuelle ekstra beskrivelse af smerten.
     const andet = document.getElementById("otherPainDescription").value.trim();
-
-    // Hvis "Andet" er valgt, skal patienten også skrive en beskrivelse.
-    if (document.getElementById("otherPainType").checked && !andet) {
-        fejl.textContent = "Beskriv venligst, hvordan smerten føles under 'Andet'.";
-        return;
-    }
 
     // Samler oplysningerne fra formularen i ét objekt.
     // Objektet repræsenterer én smerteregistrering.
@@ -324,19 +316,69 @@ function gemSmerteLog(event) {
         oprettet: new Date().toISOString()
     };
 
-    // Kontrollerer, at de vigtigste oplysninger er udfyldt.
-    // Slutdato og sluttid kræves kun, hvis smerterne er stoppet.
-    if (
-        !registrering.beskrivelse ||
-        !registrering.placering ||
-        !registrering.startDato ||
-        !registrering.startTid ||
-        (!stadigSmerter && (!registrering.slutDato || !registrering.slutTid))
-    ) {
+    // Samler alle manglende oplysninger, så patienten kan
+    // vælge, om registreringen skal gemmes alligevel.
+    const mangler = [];
 
-        // Viser en fejlbesked og stopper gemningen,
-        // hvis der mangler nødvendige oplysninger.
-        fejl.textContent = "Udfyld venligst alle de nødvendige felter.";
+    if (!registrering.beskrivelse) {
+        mangler.push("Beskrivelse af smerterne");
+    }
+
+    if (smertetyper.length === 0) {
+        mangler.push("Beskrivelse af smertetypen");
+    }
+
+    if (document.getElementById("otherPainType").checked && !andet) {
+        mangler.push("Uddybning af smertetypen under 'Andet'");
+    }
+
+    if (!registrering.placering) {
+        mangler.push("Placering af smerterne");
+    }
+
+    if (!registrering.startDato) {
+        mangler.push("Startdato");
+    }
+
+    if (!registrering.startTid) {
+        mangler.push("Starttidspunkt");
+    }
+
+    if (!stadigSmerter && !registrering.slutDato) {
+        mangler.push("Slutdato");
+    }
+
+    if (!stadigSmerter && !registrering.slutTid) {
+        mangler.push("Sluttidspunkt");
+    }
+
+    // Hvis der mangler oplysninger, vises den tilpassede dialogboks.
+    // Hvis patienten allerede har bekræftet, springes denne kontrol over.
+    if (mangler.length > 0 && !gemAlligevel) {
+        const overlay = document.getElementById("gemDialogOverlay");
+        const besked = document.getElementById("gemDialogBesked");
+
+        // Kontrollerer, at dialogboksen findes i HTML-dokumentet.
+        if (!overlay || !besked) {
+            if (fejl) {
+                fejl.textContent = "Bekræftelsesboksen kunne ikke åbnes.";
+            }
+            return;
+        }
+
+        // Viser de oplysninger, som mangler i registreringen.
+        besked.textContent =
+            "Du mangler at udfylde følgende oplysninger:\n\n" +
+            mangler.map(punkt => "- " + punkt).join("\n") +
+            "\n\nVil du gemme registreringen alligevel?";
+
+        besked.style.whiteSpace = "pre-line";
+
+        // Åbner dialogboksen.
+        overlay.hidden = false;
+
+        // Flytter fokus til annuller-knappen.
+        document.getElementById("annullerGem").focus();
         return;
     }
 
@@ -367,16 +409,25 @@ function gemSmerteLog(event) {
     } catch (error) {
 
         // Viser en fejl, hvis browseren ikke kan læse eller gemme data.
-        fejl.textContent = "Registreringen kunne ikke gemmes i denne browser.";
+        if (fejl) {
+            fejl.textContent = "Registreringen kunne ikke gemmes i denne browser.";
+        }
+
+        // Lukker dialogboksen, hvis den er åben.
+        const overlay = document.getElementById("gemDialogOverlay");
+        if (overlay) overlay.hidden = true;
+
         return;
     }
 
-    // Bekræfter, at registreringen er gemt.
-    alert("Din smerteregistrering er gemt.");
+    // Lukker dialogboksen efter gemning.
+    const overlay = document.getElementById("gemDialogOverlay");
+    if (overlay) overlay.hidden = true;
 
-    // Sender patienten tilbage til forsiden.
+    // Sender patienten tilbage til forsiden uden en ekstra browserbesked.
     window.location.href = "index.html";
 }
+
 
 
 // ======================================================
@@ -607,4 +658,47 @@ document.addEventListener("DOMContentLoaded", function () {
         igangvaerende.addEventListener("change", visSluttid);
         visSluttid();
     }
+});
+
+
+// ======================================================
+// BEKRÆFTELSESDIALOG TIL SMERTEREGISTRERING
+// ======================================================
+
+// Tilknytter funktioner til dialogboksens knapper.
+document.addEventListener("DOMContentLoaded", function () {
+
+    // Finder dialogboksen og dens knapper.
+    const overlay = document.getElementById("gemDialogOverlay");
+    const annullerKnap = document.getElementById("annullerGem");
+    const gemKnap = document.getElementById("bekraeftGem");
+
+    // Stopper, hvis dialogboksen ikke findes på den aktuelle side.
+    if (!overlay || !annullerKnap || !gemKnap) {
+        return;
+    }
+
+    // Lukker dialogboksen uden at gemme registreringen.
+    annullerKnap.addEventListener("click", function () {
+        overlay.hidden = true;
+    });
+
+    // Gemmer registreringen, selvom nogle oplysninger mangler.
+    gemKnap.addEventListener("click", function () {
+        gemSmerteLog(null, true);
+    });
+
+    // Lukker dialogboksen, hvis der klikkes uden for selve boksen.
+    overlay.addEventListener("click", function (event) {
+        if (event.target === overlay) {
+            overlay.hidden = true;
+        }
+    });
+
+    // Gør det muligt at lukke dialogboksen med Escape.
+    document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape" && !overlay.hidden) {
+            overlay.hidden = true;
+        }
+    });
 });
