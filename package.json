@@ -1,0 +1,28 @@
+{
+  "name": "it3---project",
+  "version": "1.0.0",
+  "description": "<h1> \"HELLO WORLD\"</h1>\r <h2>HELLO GIRLFRIEEEEND</h2>\r <h3>Whassup my beautiful ladies</h3>\r <p> Merge dammit, den er irriterende</p>",
+  "main": "patients.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lisa-Kilhof/IT3---project.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/Lisa-Kilhof/IT3---project/issues"
+  },
+  "homepage": "https://github.com/Lisa-Kilhof/IT3---project#readme",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^18.0.9",
+    "express": "^5.3.0",
+    "pg": "^8.23.1"
+  }
+}
