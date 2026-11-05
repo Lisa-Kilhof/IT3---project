@@ -11,3 +11,24 @@ Content-Type: application/json
 
 ### Uden body - skal give 400
 POST http://localhost:3000/api/patients
+
+### Hent symptomregistreringer
+GET http://localhost:3000/api/symptomregistreringer
+
+
+### Opret symptomregistrering
+POST http://localhost:3000/api/symptomregistreringer
+Content-Type: application/json
+
+{
+    "patient_id": 1,
+    "smertetype": "Hovedpine",
+    "beskrivelse": "Testregistrering til D2",
+    "smerteniveau": 5,
+    "dato": "2026-11-05"
+}
+
+
+### Opret symptomregistrering uden body - skal give 400
+POST http://localhost:3000/api/symptomregistreringer
+Content-Type: application/json
