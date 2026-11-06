@@ -4,7 +4,7 @@
 // ======================================================
 // LOGIN OG VALG AF BRUGERROLLE
 // ======================================================
-
+//
 // Henter brugerrollen fra URL'en.
 // URL'en indeholder enten "patient" eller "personale".
 // Rollen bruges til at bestemme, hvilken type login der vises.
