@@ -1,0 +1,27 @@
+### Hent alle patienter
+GET http://localhost:3000/api/patients
+
+###
+
+### Hent alle smerteregistreringer
+GET http://localhost:3000/api/symptomregistreringer
+
+###
+
+### Opret en ny smerteregistrering
+POST http://localhost:3000/api/symptomregistreringer
+Content-Type: application/json
+
+{
+    "patient_id": 1,
+    "smertetype": "Hovedpine",
+    "beskrivelse": "Test af ny smerteregistrering",
+    "smerteniveau": 6,
+    "dato": "2026-11-06",
+    "smertetyper": ["Dunkende", "Trykkende"],
+    "smertelokation": "Panden",
+    "starttid": "10:00",
+    "slutdato": "2026-11-06",
+    "sluttid": "12:00",
+    "igangvaerende": false
+}

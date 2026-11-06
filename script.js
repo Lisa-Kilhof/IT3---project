@@ -244,7 +244,7 @@ function visAndetFelt() {
 // Henter, kontrollerer og gemmer patientens smerteregistrering.
 // Funktionen kaldes, når patienten indsender smerteformularen.
 // Hvis der mangler oplysninger, vises den tilpassede dialogboks.
-function gemSmerteLog(event, gemAlligevel = false) {
+async function gemSmerteLog(event, gemAlligevel = false) {
 
     // Forhindrer formularen i at genindlæse siden.
     if (event) event.preventDefault();
@@ -295,7 +295,7 @@ function gemSmerteLog(event, gemAlligevel = false) {
         smertetyper: smertetyper,
 
         // Patientens ekstra beskrivelse ved valget "Andet".
-        andet: andet,
+        anden_smertetype_beskrivelse: andet,
 
         // Patientens beskrivelse af, hvor smerten sidder.
         placering: document.getElementById("painLocation").value.trim(),
@@ -384,41 +384,54 @@ function gemSmerteLog(event, gemAlligevel = false) {
 
     // Opretter en unik nøgle til patientens registreringer.
     // Patient 01 og patient 02 får dermed hver deres liste.
-    const nøgle = "registreringer_" + patientID;
+   // Oversætter patientens login-ID til det rigtige ID i Neon.
+const databasePatientID = {
+    "01": 6,
+    "02": 7
+}[patientID];
 
-    // Opretter en tom liste, som kan bruges til registreringerne.
-    let registreringer = [];
+try {
+    // Sender smerteregistreringen til serveren.
+    const response = await fetch("/api/symptomregistreringer", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            patient_id: databasePatientID,
+            smertetype: smertetyper.join(", "),
+            beskrivelse: registrering.beskrivelse,
+            smerteniveau: Number(registrering.intensitet),
+            dato: registrering.startDato,
+            smertetyper: registrering.smertetyper,
+            smertelokation: registrering.placering,
+            starttid: registrering.startTid,
+            slutdato: registrering.slutDato || null,
+            sluttid: registrering.slutTid || null,
+            igangvaerende: registrering.stadigSmerter,
+           anden_smertetype_beskrivelse:
+           registrering.anden_smertetype_beskrivelse || null
+        })
+    });
 
-    try {
-
-        // Henter patientens tidligere registreringer fra localStorage.
-        // Hvis der ikke findes nogen, bruges en tom liste.
-        registreringer = JSON.parse(localStorage.getItem(nøgle)) || [];
-
-        // Kontrollerer, at de hentede data faktisk er en liste.
-        if (!Array.isArray(registreringer)) {
-            registreringer = [];
-        }
-
-        // Tilføjer den nye registrering til listen.
-        registreringer.push(registrering);
-
-        // Gemmer listen som JSON-tekst i browserens localStorage.
-        localStorage.setItem(nøgle, JSON.stringify(registreringer));
-
-    } catch (error) {
-
-        // Viser en fejl, hvis browseren ikke kan læse eller gemme data.
-        if (fejl) {
-            fejl.textContent = "Registreringen kunne ikke gemmes i denne browser.";
-        }
-
-        // Lukker dialogboksen, hvis den er åben.
-        const overlay = document.getElementById("gemDialogOverlay");
-        if (overlay) overlay.hidden = true;
-
-        return;
+    if (!response.ok) {
+        throw new Error("Registreringen kunne ikke gemmes.");
     }
+
+} catch (error) {
+    console.error("Fejl ved gemning:", error);
+
+    if (fejl) {
+        fejl.textContent =
+            "Registreringen kunne ikke gemmes. Prøv igen.";
+    }
+
+    const overlay = document.getElementById("gemDialogOverlay");
+    if (overlay) overlay.hidden = true;
+
+    return;
+}
+
 
     // Lukker dialogboksen efter gemning.
     const overlay = document.getElementById("gemDialogOverlay");
@@ -501,114 +514,111 @@ function visPatientDetaljer() {
 }
 
 
-// Henter og viser alle registreringer for en bestemt patient.
-function visPatientRegistreringer(patientID) {
 
-    // Finder området på siden, hvor registreringerne skal vises.
+ // Henter og viser alle registreringer for en bestemt patient fra Neon.
+async function visPatientRegistreringer(patientID) {
+
     const område = document.getElementById("patientRegistreringer");
-
-    // Fjerner eventuelt tidligere indhold fra området.
     område.replaceChildren();
 
-    // Opretter en tom liste til patientens registreringer.
-    let registreringer = [];
+    // Kobler login-ID til patientens rigtige ID i Neon.
+    const databasePatientID = {
+        "01": 6,
+        "02": 7
+    }[patientID];
 
     try {
-
-        // Henter registreringerne fra localStorage og omdanner
-        // JSON-teksten til JavaScript-data.
-        registreringer = JSON.parse(
-            localStorage.getItem("registreringer_" + patientID)
-        ) || [];
-
-    } catch (error) {
-
-        // Viser en fejl, hvis registreringerne ikke kan læses.
-        område.textContent = "Registreringerne kunne ikke læses.";
-        return;
-    }
-
-    // Hvis patienten endnu ikke har registreret smerter,
-    // vises en besked i stedet for en tom liste.
-    if (registreringer.length === 0) {
-        område.textContent = "Ingen smerteregistreringer endnu.";
-        return;
-    }
-
-    // Gennemgår alle registreringer én ad gangen.
-    // index bruges til at nummerere registreringerne.
-    registreringer.forEach((registrering, index) => {
-
-        // Opretter en ny HTML-boks til registreringen.
-        const boks = document.createElement("article");
-        boks.className = "registration-item";
-
-        // Opretter en overskrift med registreringens nummer.
-        const overskrift = document.createElement("h4");
-        overskrift.textContent = "Registrering " + (index + 1);
-
-        // Tilføjer overskriften til registreringsboksen.
-        boks.appendChild(overskrift);
-
-        // Hjælpefunktion, der opretter en linje med en overskrift
-        // og den tilhørende værdi.
-        function tilføjOplysning(tekst, værdi) {
-
-            // Opretter et afsnit til oplysningerne.
-            const linje = document.createElement("p");
-
-            // Viser teksten og værdien.
-            // Hvis værdien mangler, vises "Ikke angivet".
-            linje.textContent = tekst + ": " + (værdi || "Ikke angivet");
-
-            // Tilføjer linjen til registreringsboksen.
-            boks.appendChild(linje);
-        }
-
-        // Viser patientens egen smertebeskrivelse.
-        tilføjOplysning("Smertebeskrivelse", registrering.beskrivelse);
-
-        // Viser smerteintensiteten på en skala fra 0 til 10.
-        tilføjOplysning("Smerteintensitet", registrering.intensitet + "/10");
-
-        // Viser de valgte smertetyper.
-        // Array.isArray kontrollerer, at værdien er en liste,
-        // før de enkelte smertetyper samles til tekst.
-        tilføjOplysning(
-            "Smertetype",
-            Array.isArray(registrering.smertetyper)
-                ? registrering.smertetyper.join(", ")
-                : "Ikke angivet"
+        // Henter patientens registreringer fra backend.
+        const response = await fetch(
+            `/api/symptomregistreringer?patient_id=${databasePatientID}`
         );
 
-        // Viser den ekstra beskrivelse, hvis patienten har udfyldt den.
-        if (registrering.andet) {
-            tilføjOplysning("Andet", registrering.andet);
+        if (!response.ok) {
+            throw new Error("Registreringerne kunne ikke hentes.");
         }
 
-        // Viser, hvor smerten sidder.
-        tilføjOplysning("Placering", registrering.placering);
+        const registreringer = await response.json();
 
-        // Viser dato og tidspunkt for smertens begyndelse.
-        tilføjOplysning("Startdato", registrering.startDato);
-        tilføjOplysning("Starttidspunkt", registrering.startTid);
-
-        // Viser enten den aktuelle status eller sluttidspunktet.
-        if (registrering.stadigSmerter) {
-
-            // Hvis smerterne fortsætter, vises en statusbesked.
-            tilføjOplysning("Status", "Smerterne er ikke stoppet endnu");
-
-        } else {
-
-            // Hvis smerterne er stoppet, vises slutdato og sluttid.
-            tilføjOplysning("Slutdato", registrering.slutDato);
-            tilføjOplysning("Sluttidspunkt", registrering.slutTid);
+        // Viser en besked, hvis patienten ikke har registreringer.
+        if (registreringer.length === 0) {
+            område.textContent = "Ingen smerteregistreringer endnu.";
+            return;
         }
 
-        // Tilføjer den færdige registreringsboks til siden.
-        område.appendChild(boks);
-    });
+        // Gennemgår alle registreringerne.
+        registreringer.forEach((registrering, index) => {
+
+            const boks = document.createElement("article");
+            boks.className = "registration-item";
+
+            const overskrift = document.createElement("h4");
+            overskrift.textContent = "Registrering " + (index + 1);
+            boks.appendChild(overskrift);
+
+            // Hjælpefunktion til at vise oplysninger.
+            function tilføjOplysning(tekst, værdi) {
+                const linje = document.createElement("p");
+
+                linje.textContent =
+                    tekst + ": " +
+                    (værdi !== null && værdi !== undefined && værdi !== ""
+                        ? værdi
+                        : "Ikke angivet");
+
+                boks.appendChild(linje);
+            }
+
+            tilføjOplysning(
+                "Smertebeskrivelse",
+                registrering.beskrivelse
+            );
+
+            tilføjOplysning(
+                "Smerteintensitet",
+                registrering.smerteniveau + "/10"
+            );
+
+            tilføjOplysning(
+                "Smertetype",
+                Array.isArray(registrering.smertetyper)
+                    ? registrering.smertetyper.join(", ")
+                    : registrering.smertetype
+            );
+
+            if (registrering.anden_smertetype_beskrivelse) {
+                tilføjOplysning(
+                    "Andet",
+                    registrering.anden_smertetype_beskrivelse
+                );
+            }
+
+            tilføjOplysning(
+                "Placering",
+                registrering.smertelokation
+            );
+
+            tilføjOplysning("Startdato", registrering.dato);
+            tilføjOplysning("Starttidspunkt", registrering.starttid);
+
+            if (registrering.igangvaerende) {
+                tilføjOplysning(
+                    "Status",
+                    "Smerterne er ikke stoppet endnu"
+                );
+            } else {
+                tilføjOplysning("Slutdato", registrering.slutdato);
+                tilføjOplysning("Sluttidspunkt", registrering.sluttid);
+            }
+
+            område.appendChild(boks);
+        });
+
+    } catch (fejl) {
+        console.error("Fejl ved hentning af registreringer:", fejl);
+
+        område.textContent =
+            "Registreringerne kunne ikke hentes. Prøv igen.";
+    }
 }
 
 
