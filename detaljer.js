@@ -55,7 +55,6 @@ async function visPatientRegistreringer(patientID) {
     }[patientID];
 
     try {
-
         // Henter patientens registreringer fra backend.
         const response = await fetch(
             `/api/symptomregistreringer?patient_id=${databasePatientID}`
