@@ -15,8 +15,10 @@
     <!-- Indlæser den fælles CSS-fil, som bestemmer sidens udseende. -->
     <link rel="stylesheet" href="styles.css">
 
-    <!-- Indlæser JavaScript-funktionerne til login og smerteregistrering. -->
-    <script src="script.js" defer></script>
+    <!-- Indlæser JavaScript-filerne til adgangskontrol og smerteregistrering.
+         defer sørger for, at filerne udføres efter HTML-dokumentet er indlæst. -->
+    <script src="adgangskontrol.js" defer></script>
+    <script src="smertedagbog.js" defer></script>
 </head>
 
 <!-- Bekræftelsesboks ved manglende oplysninger -->
@@ -62,7 +64,7 @@
         <p>Udfyld oplysningerne om dine smerter nedenfor.</p>
 
         <!-- Formularen samler de oplysninger, patienten indtaster.
-             JavaScript håndterer validering og gemning ved indsendelse. -->
+             JavaScript i smertedagbog.js håndterer validering og gemning ved indsendelse. -->
         <form id="smerteForm" novalidate>
 
             <!-- PATIENTENS EGEN BESKRIVELSE -->
@@ -85,7 +87,8 @@
             <p>Vælg et tal fra 0 til 10.</p>
 
             <!-- En range-input giver en skyder til valg af smerteintensitet.
-                 oninput kalder JavaScript, når skyderens værdi ændres. -->
+                 oninput kalder opdaterIntensitet() fra smertedagbog.js,
+                 når skyderens værdi ændres. -->
             <div class="slider-række">
                 <input
                     type="range"
@@ -167,7 +170,7 @@
             <!-- EKSTRA BESKRIVELSE VED "ANDET" -->
 
             <!-- Feltet er skjult fra starten.
-                 JavaScript viser det, når patienten vælger "Andet". -->
+                 JavaScript i smertedagbog.js viser det, når patienten vælger "Andet". -->
             <div id="otherPainText" hidden>
 
                 <!-- Etiket, der forklarer, hvad patienten skal skrive. -->
@@ -228,7 +231,7 @@
             </label>
 
             <!-- Indeholder felterne til registrering af smertens afslutning.
-                 JavaScript skjuler området, hvis smerterne fortsætter. -->
+                 JavaScript i smertedagbog.js skjuler området, hvis smerterne fortsætter. -->
             <div id="slutTidFelter" class="date-time-row">
 
                 <div>
