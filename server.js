@@ -1,7 +1,7 @@
 import "dotenv/config";
 import express from "express";
 import cors from "cors";
-
+import path from "node:path";
 
 import { hentPatienter } from "./patients.js";
 import {
@@ -15,10 +15,9 @@ const PORT = process.env.PORT || 3000;
 // Middleware
 app.use(cors());
 app.use(express.json());
-// Serverer frontend-filerne lokalt
-if (!process.env.VERCEL) {
-    app.use(express.static("public"));
-}
+// Serverer statisk indhold fra public-mappen, hvis vi ikke kører på Vercel
+app.use(express.static(path.join(import.meta.dirname, "public")));
+
 
 // GET: Hent alle patienter fra Neon
 app.get("/api/patients", async (req, res) => {
