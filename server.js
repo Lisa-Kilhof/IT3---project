@@ -15,14 +15,10 @@ const PORT = process.env.PORT || 3000;
 // Middleware
 app.use(cors());
 app.use(express.json());
-// Serverer frontend-filerne lokalt
-if (!process.env.VERCEL) {
-    app.use(express.static("public"));
-}
-// Viser forsiden
-app.get("/", (req, res) => {
-    res.sendFile(path.join(import.meta.dirname, "public", "index.html"));
-});
+// Serverer statisk indhold fra public-mappen, hvis vi ikke kører på Vercel
+app.use(express.static(path.join(import.meta.dirname, "public")));
+
+
 // GET: Hent alle patienter fra Neon
 app.get("/api/patients", async (req, res) => {
     try {
@@ -131,6 +127,9 @@ app.use((req, res) => {
 });
 
 // Start serveren
+if (!process.env.VERCEL) {
 app.listen(PORT, () => {
     console.log(`Serveren kører på port ${PORT}`);
 });
+}
+export default app;
