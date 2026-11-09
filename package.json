@@ -88,6 +88,7 @@
     "xtend": "^4.0.2"
   },
   "scripts": {
+    "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

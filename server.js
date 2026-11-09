@@ -1,7 +1,7 @@
-
 import "dotenv/config";
 import express from "express";
 import cors from "cors";
+import path from "node:path";
 
 import { hentPatienter } from "./patients.js";
 import {
@@ -15,8 +15,14 @@ const PORT = process.env.PORT || 3000;
 // Middleware
 app.use(cors());
 app.use(express.json());
-app.use(express.static("."));
-
+// Serverer frontend-filerne lokalt
+if (!process.env.VERCEL) {
+    app.use(express.static("public"));
+}
+// Viser forsiden
+app.get("/", (req, res) => {
+    res.sendFile(path.join(import.meta.dirname, "public", "index.html"));
+});
 // GET: Hent alle patienter fra Neon
 app.get("/api/patients", async (req, res) => {
     try {
