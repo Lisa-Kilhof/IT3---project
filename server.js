@@ -1,7 +1,7 @@
 import "dotenv/config";
 import express from "express";
 import cors from "cors";
-import path from "node:path";
+
 
 import { hentPatienter } from "./patients.js";
 import {
@@ -131,6 +131,9 @@ app.use((req, res) => {
 });
 
 // Start serveren
+if (!process.env.VERCEL) {
 app.listen(PORT, () => {
     console.log(`Serveren kører på port ${PORT}`);
 });
+}
+export default app;
