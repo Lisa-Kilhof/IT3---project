@@ -19,10 +19,7 @@ app.use(express.json());
 if (!process.env.VERCEL) {
     app.use(express.static("public"));
 }
-// Viser forsiden
-app.get("/", (req, res) => {
-    res.sendFile(path.join(import.meta.dirname, "public", "index.html"));
-});
+
 // GET: Hent alle patienter fra Neon
 app.get("/api/patients", async (req, res) => {
     try {
